@@ -2,11 +2,13 @@
   <div>
     <h1>Ideas Notepad</h1>
     <p>write your ideas here</p>
+
+    <IdeaCard/>
   </div>
 </template>
 
 <script setup
-        lang="ts">
+import IdeaCard from "@/components/common/IdeaCard.vue";
 
 </script>
 
