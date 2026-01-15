@@ -1,27 +1,26 @@
 <template>
   <div class="base-text-input">
     <label>{{ label }}</label>
-    <input type="text"
-           ref="text-input"
-           v-model="inputValue"
-           :autocomplete="autocompleteValue"
-           :size="inputWidth"
-           :placeholder
-           :required
-           :disabled
-           @input="onInput"
-           @change="onChange"
-           @keydown.enter="onEnter"/>
+    <textarea type="text"
+              ref="text-input"
+              v-model="inputValue"
+              :autocomplete="autocompleteValue"
+              :placeholder
+              :required
+              :disabled
+              @input="onInput"
+              @change="onChange"
+              @keydown.enter="onEnter"/>
   </div>
 </template>
 
 <script setup lang="ts">
-
 import {computed, ref} from "vue";
+
+//TODO have <textarea spellcheck="true"/> be connected to settings
 
 interface ITextInputProps {
   required?: boolean,
-  inputWidth?: number,
   disabled?: boolean,
   label?: string,
   autocomplete?: boolean,
@@ -29,7 +28,6 @@ interface ITextInputProps {
 }
 
 const props = withDefaults(defineProps<ITextInputProps>(), {
-  inputWidth: 12,
   autocomplete: false
 })
 
@@ -65,13 +63,13 @@ const onEnter = (e: Event) => {
   flex-direction: column;
   gap: .15rem;
 
-  input {
-    /* TODO width cannot be changed with props */
-    width: 8rem;
-    border-radius: .25rem;
+  textarea {
+    resize: none;
     border-width: var(--input-border-width);
+    border-radius: .5rem;
     border-color: var(--input-border-color);
-    box-shadow: grey 2px 2px
+    height: 100%;
+    box-shadow: grey 4px 4px;
   }
 }
 </style>

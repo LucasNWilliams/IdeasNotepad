@@ -1,8 +1,12 @@
 <template>
-  <dialog ref="dialog" class="baseDialog">
+  <dialog ref="dialog" class="base-dialog">
     <header>
-      <button @click="closeDialog">close</button>
+      <h2>{{ header }}</h2>
+      <div class="dialog-header-left">
+        <button @click="closeDialog">close</button>
+      </div>
     </header>
+    <hr>
     <slot/>
   </dialog>
 </template>
@@ -11,6 +15,12 @@
 import {ref, watch} from "vue";
 
 const visible = defineModel<boolean>('visible', {default: false})
+
+interface IDialogProps {
+  header?: string
+}
+
+const props = defineProps<IDialogProps>()
 
 const dialog = ref<HTMLDialogElement>()
 
@@ -31,15 +41,24 @@ const closeDialog = () => {
 </script>
 
 <style scoped lang="scss">
-.baseDialog {
-  width: 20rem;
-  height: 10rem;
+dialog::backdrop {
+  background: black;
+  opacity: .5;
+}
+
+.base-dialog {
   padding: 1.5rem;
   border-radius: 1.5rem;
+  border-width: 4px;
 
   header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+
+    .dialog-header-left {
+      display: flex;
+      align-items: center;
+    }
   }
 }
 </style>
