@@ -2,6 +2,11 @@ body {
   --main-background-color: #282c34;
   --main-text-color: #ffffff;
 
+  --input-border-width: 1px;
+  --input-border-color: #454750FF;
+
   background-color: var(--main-background-color);
   color: var(--main-text-color);
+
+  font-family: 'Trebuchet MS', sans-serif;
 }

@@ -13,6 +13,6 @@ const visible = defineModel<boolean>('visible', {default: false})
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

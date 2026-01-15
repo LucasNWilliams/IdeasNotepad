@@ -30,7 +30,7 @@ const closeDialog = () => {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .baseDialog {
   width: 20rem;
   height: 10rem;

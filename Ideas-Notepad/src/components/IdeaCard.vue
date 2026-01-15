@@ -13,7 +13,7 @@ const description = ref('This is a description of the idea.');
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .idea-card {
   --card-background-color: color-mix(in oklab, var(--main-background-color) 88%, white);
   --description-background-color: color-mix(in oklab, var(--main-background-color) 75%, white);

@@ -59,7 +59,7 @@ const onEnter = (e: Event) => {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .base-text-input {
   display: flex;
   flex-direction: column;
