@@ -15,13 +15,16 @@ const description = ref('This is a description of the idea.');
 
 <style scoped>
 .idea-card {
-  --card-background-color: color-mix(in oklab, var(--main-background-color) 85%, white);
-  --description-background-color: color-mix(in oklab, var(--main-background-color) 73%, white);
+  --card-background-color: color-mix(in oklab, var(--main-background-color) 88%, white);
+  --description-background-color: color-mix(in oklab, var(--main-background-color) 75%, white);
+
+  --idea-card-height: 20rem;
+  --idea-card-max-height: 30rem;
 
   width: 20rem;
   max-width: 30rem;
-  height: 20rem;
-  max-height: 30rem;
+  height: var(--idea-card-height);
+  max-height: var(--idea-card-max-height);
   background-color: var(--card-background-color);
   border-radius: 1rem;
   padding: .5rem 1.5rem;
@@ -30,6 +33,8 @@ const description = ref('This is a description of the idea.');
     background-color: var(--description-background-color);
     border-radius: .5rem;
     padding: .5rem .75rem;
+    max-height: calc(var(--idea-card-max-height) - 6.25rem);
+    height: calc(var(--idea-card-height) - 6.25rem);
   }
 }
 </style>
