@@ -34,6 +34,8 @@ const closeDialog = () => {
 .baseDialog {
   width: 20rem;
   height: 10rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
 
   header {
     display: flex;
