@@ -19,6 +19,9 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@fortawesome/vue-fontawesome": "^3.0.5",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@tsconfig/node24": "^24.0.3",
     "@types/node": "^24.10.4",
     "@vitejs/plugin-vue": "^6.0.3",
