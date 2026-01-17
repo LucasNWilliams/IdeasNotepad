@@ -57,6 +57,7 @@ const onClick = (e: Event) => {
   padding: .5rem .75rem;
   margin: .75rem .5rem;
   cursor: pointer;
+  background: #ffffff;
   border-radius: .5rem;
   box-shadow: grey 4px 4px;
 
