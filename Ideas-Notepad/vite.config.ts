@@ -13,6 +13,11 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
+      'src': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  server: {
+    port: 6741,
+    host: 'localhost'
+  }
 })
