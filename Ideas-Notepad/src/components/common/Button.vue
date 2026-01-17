@@ -1,10 +1,19 @@
 <template>
-  <button class="button-body" @click="onClick">
-    <!--    TODO FontAwesomeIcon -->
+  <button v-if="iconOnly && icon != null"
+          class="button-icon-only"
+          @click="onClick">
     <slot>
-      <template v-if="icon != null">
-        <FontAwesomeIcon :icon="icon"/>
-      </template>
+        <FontAwesomeIcon :icon="icon" :size="iconSize"/>
+    </slot>
+  </button>
+
+  <button v-else
+          class="button-body"
+          @click="onClick">
+    <template v-if="icon != null">
+      <FontAwesomeIcon :icon="icon" :size="iconSize"/>
+    </template>
+    <slot>
       <template v-if="label != null">
         {{ label }}
       </template>
@@ -18,16 +27,23 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {FALibraryIcons} from "@/font-awesome-icons";
 import {IconDefinition} from "@fortawesome/free-regular-svg-icons";
 
+type iconSizes = "2xs" | "xs" | "sm" | "lg" | "xl" | "2xl" | "1x" | "2x" | "3x" | "4x" | "5x" | "6x" | "7x" | "8x" | "9x" | "10x"
+
 interface IButtonProps {
   label?: string
   icon?: typeof FALibraryIcons | IconDefinition
+  iconOnly?: boolean
+  iconSize?: iconSizes
 }
 
-const props = defineProps<IButtonProps>()
-const emit = defineEmits(['onClick'])
+const props = withDefaults(defineProps<IButtonProps>(), {
+  iconOnly: false,
+  iconSize: '1x',
+})
+const emit = defineEmits(['click'])
 
 const onClick = (e: Event) => {
-  emit('onClick', e)
+  emit('click', e)
 }
 
 </script>
@@ -36,8 +52,33 @@ const onClick = (e: Event) => {
 .button-body {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: .5rem;
-  padding: .25rem .5rem;
-  margin: .5rem;
+  padding: .5rem .75rem;
+  margin: .75rem .5rem;
+  cursor: pointer;
+  border-radius: .5rem;
+  box-shadow: grey 4px 4px;
+
+  &:hover {
+    background: #d8d8d8;
+    transition: .3s;
+  }
+}
+
+.button-icon-only {
+  background-color: transparent;
+  border-color:transparent;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+
+  &:hover {
+    background: #dfdfdf;
+    transition: .4s;
+  }
+
 }
 </style>

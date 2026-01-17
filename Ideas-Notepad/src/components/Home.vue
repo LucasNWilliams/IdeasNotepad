@@ -3,8 +3,8 @@
     <h1>Ideas Notepad</h1>
     <p>Write your ideas here!</p>
 
-    <Button @click="toggleNewIdea">+ Make Idea</Button>
-    <Button label="test" :icon="FALibraryIcons.faCircleXmark"/>
+    <Button :icon="FALibraryIcons.faPlus"
+            @click="toggleNewIdea">Make Idea</Button>
 
     <NewIdeaDialog v-model:visible="visible"/>
     <IdeaCard/>
