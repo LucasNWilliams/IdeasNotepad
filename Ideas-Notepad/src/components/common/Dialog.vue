@@ -3,7 +3,10 @@
     <header>
       <h2>{{ header }}</h2>
       <div class="dialog-header-left">
-        <button @click="closeDialog">close</button>
+        <Button :icon="FALibraryIcons.faCircleXmark"
+                icon-size="2x"
+                icon-only
+                @click="closeDialog"/>
       </div>
     </header>
     <hr>
@@ -13,6 +16,8 @@
 
 <script setup lang="ts">
 import {ref, watch} from "vue";
+import {FALibraryIcons} from "@/font-awesome-icons";
+import Button from "@/components/common/Button.vue";
 
 const visible = defineModel<boolean>('visible', {default: false})
 
