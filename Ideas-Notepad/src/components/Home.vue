@@ -4,7 +4,7 @@
     <p>Write your ideas here!</p>
 
     <Button @click="toggleNewIdea">+ Make Idea</Button>
-    <Button label="test"/>
+    <Button label="test" :icon="FALibraryIcons.faCircleXmark"/>
 
     <NewIdeaDialog v-model:visible="visible"/>
     <IdeaCard/>
@@ -16,6 +16,7 @@ import IdeaCard from "@/components/IdeaCard.vue";
 import NewIdeaDialog from "@/components/NewIdeaDialog.vue";
 import {ref} from "vue";
 import Button from "@/components/common/Button.vue";
+import {FALibraryIcons} from "@/font-awesome-icons";
 
 let visible = ref(false);
 

@@ -1,7 +1,10 @@
 <template>
-  <button @click="onClick">
-<!--    TODO FontAwesomeIcon -->
+  <button class="button-body" @click="onClick">
+    <!--    TODO FontAwesomeIcon -->
     <slot>
+      <template v-if="icon != null">
+        <FontAwesomeIcon :icon="icon"/>
+      </template>
       <template v-if="label != null">
         {{ label }}
       </template>
@@ -11,9 +14,13 @@
 
 <script setup lang="ts">
 
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {FALibraryIcons} from "@/font-awesome-icons";
+import {IconDefinition} from "@fortawesome/free-regular-svg-icons";
+
 interface IButtonProps {
   label?: string
-  icon?: object
+  icon?: typeof FALibraryIcons | IconDefinition
 }
 
 const props = defineProps<IButtonProps>()
@@ -26,5 +33,11 @@ const onClick = (e: Event) => {
 </script>
 
 <style scoped lang="scss">
-
+.button-body {
+  display: flex;
+  flex-direction: row;
+  gap: .5rem;
+  padding: .25rem .5rem;
+  margin: .5rem;
+}
 </style>
