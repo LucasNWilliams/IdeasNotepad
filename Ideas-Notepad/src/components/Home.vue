@@ -1,9 +1,10 @@
 <template>
   <div>
     <h1>Ideas Notepad</h1>
-    <p>write your ideas here</p>
+    <p>Write your ideas here!</p>
 
-    <button @click="toggleNewIdea">+ Make Idea</button>
+    <Button @click="toggleNewIdea">+ Make Idea</Button>
+    <Button label="test"/>
 
     <NewIdeaDialog v-model:visible="visible"/>
     <IdeaCard/>
@@ -14,6 +15,7 @@
 import IdeaCard from "@/components/IdeaCard.vue";
 import NewIdeaDialog from "@/components/NewIdeaDialog.vue";
 import {ref} from "vue";
+import Button from "@/components/common/Button.vue";
 
 let visible = ref(false);
 
