@@ -3,7 +3,8 @@
           header="New Idea">
     <div class="new-idea-body">
       <TextInput v-model="ideaContent.title"
-                 label="Idea Title"/>
+                 label="Idea Title"
+                 full-width/>
       <TextArea v-model="ideaContent.description"
                 label="Description"
                 class="idea-description"/>
@@ -46,7 +47,7 @@ const saveDialog = () => {
 <style scoped lang="scss">
 dialog {
   width: 30rem;
-  height: 30rem;
+  min-height: 30rem;
 
   .new-idea-body {
     display: flex;
@@ -56,7 +57,6 @@ dialog {
     padding-bottom: 1rem;
 
     .idea-description {
-      width: 100%;
       height: 15rem;
     }
   }

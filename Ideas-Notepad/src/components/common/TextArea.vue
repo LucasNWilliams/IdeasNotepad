@@ -64,6 +64,7 @@ const onEnter = (e: Event) => {
   gap: .15rem;
 
   textarea {
+    padding: .5rem;
     resize: none;
     border-width: var(--input-border-width);
     border-radius: .5rem;

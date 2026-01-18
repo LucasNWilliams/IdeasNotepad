@@ -5,7 +5,7 @@
            ref="text-input"
            v-model="inputValue"
            :autocomplete="autocompleteValue"
-           :size="inputWidth"
+           :style="inputStyles"
            :placeholder
            :required
            :disabled
@@ -26,6 +26,7 @@ interface ITextInputProps {
   label?: string,
   autocomplete?: boolean,
   placeholder?: string
+  fullWidth?: boolean
 }
 
 const props = withDefaults(defineProps<ITextInputProps>(), {
@@ -37,6 +38,10 @@ const emit = defineEmits(['update:modelValue', 'input', 'change', 'enter'])
 
 const autocompleteValue = computed(() => {
   return props.autocomplete ? 'on' : 'off'
+})
+
+const inputStyles = computed(() => {
+  return !props.fullWidth ? `width: ${props.inputWidth}rem` : undefined
 })
 
 const inputValue = ref()
@@ -66,12 +71,11 @@ const onEnter = (e: Event) => {
   gap: .15rem;
 
   input {
-    /* TODO width cannot be changed with props */
-    width: 8rem;
+    padding: .5rem;
     border-radius: .25rem;
     border-width: var(--input-border-width);
     border-color: var(--input-border-color);
-    box-shadow: grey 2px 2px
+    box-shadow: grey 4px 4px
   }
 }
 </style>
