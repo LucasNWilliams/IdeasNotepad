@@ -1,11 +1,10 @@
 function GetAllLocalStorage(storageKey: string): Promise<object[]> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     if (localStorage.getItem(storageKey) == null) {
-      reject('Key does not exist')
-    } else {
-      const retrievedData = JSON.parse(localStorage.getItem(storageKey) || '{}')
-      resolve(retrievedData)
+      void SetLocalStorage(storageKey, [])
     }
+    const retrievedData = JSON.parse(localStorage.getItem(storageKey) || '[]')
+    resolve(retrievedData)
   })
 }
 
@@ -26,19 +25,16 @@ function GetSingleLocalStorage(storageKey: string, id: string) {
 
 function SetLocalStorage(storageKey: string, value: object[]): Promise<void> {
   return new Promise((resolve) => {
-    localStorage.setItem(storageKey, JSON.stringify(value || '{}'))
+    localStorage.setItem(storageKey, JSON.stringify(value || '[]'))
     resolve()
   })
 }
 
-function CreateLocalStorage(storageKey: string, value: object): Promise<void> {
+function CreateLocalStorage(storageKey: string, value: { id?: string }): Promise<void> {
   return new Promise(async (resolve) => {
     const localStorageArray = await GetAllLocalStorage(storageKey)
 
-    const newIdObject = {
-      id: self.crypto.randomUUID()
-    }
-    Object.assign(value, newIdObject)
+    value.id = self.crypto.randomUUID()
 
     localStorageArray.push(value)
     resolve(SetLocalStorage(storageKey, localStorageArray))
@@ -76,11 +72,26 @@ function DeleteLocalStorage(storageKey: string, id: string) {
   })
 }
 
+function ClearLocalStorageKey(storageKey: string) {
+  let confirmOnce = confirm(`You are clearing every value for \"${storageKey}.\" Are you sure you want to continue?`)
+  if (confirmOnce) {
+    let confirmTwice = confirm(`Are you sure you want to clear \"${storageKey}?\"`)
+    if (confirmTwice) {
+      let confirmThrice = confirm(`Are you 100% sure you want to clear \"${storageKey}?\"`)
+      if (confirmThrice) {
+        alert(`Deleting all values for \"${storageKey}\"`)
+        void SetLocalStorage(storageKey, [])
+      }
+    }
+  }
+}
+
 export default {
   GetAllLocalStorage,
   GetSingleLocalStorage,
   SetLocalStorage,
   CreateLocalStorage,
   UpdateLocalStorage,
-  DeleteLocalStorage
+  DeleteLocalStorage,
+  ClearLocalStorageKey
 }

@@ -28,9 +28,15 @@ const DeleteIdea = (id: string) => {
   return api.DeleteData(url, id)
 }
 
+const ClearIdeas = () => {
+  const url = IdeasListKey
+  return crud.ClearLocalStorageKey(url)
+}
+
 export {
   GetIdeas,
   AddIdea,
   EditIdea,
-  DeleteIdea
+  DeleteIdea,
+  ClearIdeas
 }
