@@ -1,18 +1,25 @@
 import crud from "@/API/crud";
 
 
-function GetData(storageKey: string) {
-  return crud.GetLocalStorage(storageKey)
+function GetData(url: string) {
+  return crud.GetAllLocalStorage(url)
 }
 
-function PostData(storageKey: string, value: object) {
-  return crud.CreateLocalStorage(storageKey, value)
+function PostData(url: string, value: object) {
+  return crud.CreateLocalStorage(url, value)
 }
 
-function PutData(storageKey: string, value: object, id: string) {
-  return crud.UpdateLocalStorage(storageKey, value, id)
+function PutData(url: string, id: string, value: object,) {
+  return crud.UpdateLocalStorage(url, id, value)
 }
 
-function DeleteData(storageKey: string, id: string) {
-  return crud.DeleteLocalStorage(storageKey, id)
+function DeleteData(url: string, id: string) {
+  return crud.DeleteLocalStorage(url, id)
+}
+
+export default {
+  GetData,
+  PostData,
+  PutData,
+  DeleteData
 }

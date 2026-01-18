@@ -1,4 +1,4 @@
-function GetLocalStorage(storageKey: string): Promise<object[]> {
+function GetAllLocalStorage(storageKey: string): Promise<object[]> {
   return new Promise((resolve, reject) => {
     if (localStorage.getItem(storageKey) == null) {
       reject('Key does not exist')
@@ -6,6 +6,21 @@ function GetLocalStorage(storageKey: string): Promise<object[]> {
       const retrievedData = JSON.parse(localStorage.getItem(storageKey) || '{}')
       resolve(retrievedData)
     }
+  })
+}
+
+function GetSingleLocalStorage(storageKey: string, id: string) {
+  return new Promise(async (resolve, reject) => {
+    const localStorageArray = await GetAllLocalStorage(storageKey)
+
+    const selectedItem = localStorageArray.find((item) => item.id === id)
+
+    if (selectedItem != undefined) {
+      resolve(selectedItem)
+    } else {
+      reject('Id does not exist')
+    }
+
   })
 }
 
@@ -18,7 +33,7 @@ function SetLocalStorage(storageKey: string, value: object[]): Promise<void> {
 
 function CreateLocalStorage(storageKey: string, value: object): Promise<void> {
   return new Promise(async (resolve) => {
-    const localStorageArray = await GetLocalStorage(storageKey)
+    const localStorageArray = await GetAllLocalStorage(storageKey)
 
     const newIdObject = {
       id: self.crypto.randomUUID()
@@ -30,9 +45,9 @@ function CreateLocalStorage(storageKey: string, value: object): Promise<void> {
   })
 }
 
-function UpdateLocalStorage(storageKey: string, value: object, id: string) {
+function UpdateLocalStorage(storageKey: string, id: string, value: object) {
   return new Promise(async (resolve, reject) => {
-    const localStorageArray = await GetLocalStorage(storageKey)
+    const localStorageArray = await GetAllLocalStorage(storageKey)
 
     const updatedItemIndex = localStorageArray.indexOf((item: { id: string }) => item.id === id)
 
@@ -48,7 +63,7 @@ function UpdateLocalStorage(storageKey: string, value: object, id: string) {
 
 function DeleteLocalStorage(storageKey: string, id: string) {
   return new Promise(async (resolve, reject) => {
-    const localStorageArray = await GetLocalStorage(storageKey)
+    const localStorageArray = await GetAllLocalStorage(storageKey)
 
     const deletedItemIndex = localStorageArray.indexOf((item: { id: string }) => item.id === id)
 
@@ -62,7 +77,8 @@ function DeleteLocalStorage(storageKey: string, id: string) {
 }
 
 export default {
-  GetLocalStorage,
+  GetAllLocalStorage,
+  GetSingleLocalStorage,
   SetLocalStorage,
   CreateLocalStorage,
   UpdateLocalStorage,
