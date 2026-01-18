@@ -3,33 +3,41 @@
     <h1>Ideas Notepad</h1>
     <p>Write your ideas here!</p>
 
-    <Button :icon="FALibraryIcons.faPlus"
-            label="Make Idea"
-            @click="toggleNewIdeaDialog()"/>
-<!--    <Button @click="addIdea">Add Idea</Button>-->
-    <Button @click="ClearIdeas">Clear Ideas</Button>
-
     <NewIdeaDialog v-model:visible="visible"
                    :new-idea="ideaDialogData"
                    @save="saveIdea"/>
-    <IdeaCard/>
+
+    <Button :icon="FALibraryIcons.faPlus"
+            label="Make Idea"
+            @click="toggleNewIdeaDialog()"/>
+    <Button @click="ClearIdeas">Clear Ideas</Button>
+
+    <ul class="ideas-list">
+      <li v-for="idea in ideas" :key="idea.id">
+        <IdeaCard :id="idea.id"
+                  :title="idea.title"
+                  :description="idea.description"/>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup lang="ts">
 import IdeaCard from "@/components/IdeaCard.vue";
-import {defineAsyncComponent, onMounted, ref} from "vue";
+import {defineAsyncComponent, onMounted, reactive, ref} from "vue";
 import Button from "@/components/common/Button.vue";
 import {FALibraryIcons} from "@/font-awesome-icons";
 import {AddIdea, ClearIdeas, GetIdeas} from "@/components/api";
 
 const NewIdeaDialog = defineAsyncComponent(() => import("@/components/NewIdeaDialog.vue"))
 
-let newIdeaTemplate: IIdeaContent = {
+const newIdeaTemplate: IIdeaContent = {
+  id: '',
   title: '',
   description: ''
 }
 
+const ideas = reactive<IIdeaContent[]>([])
 let ideaDialogData = ref<IIdeaContent>({} as IIdeaContent)
 
 let visible = ref(false);
@@ -50,7 +58,9 @@ const setIdeaDialogData = (idea: IIdeaContent | null) => {
 const getIdeas = () => {
   GetIdeas()
     .then((res) => {
-      console.log(res)
+      ideas.length = 0;
+      ideas.push(...res)
+      console.log(ideas)
     })
 }
 
@@ -62,14 +72,6 @@ const saveIdea = (ideaData: IIdeaContent) => {
     })
 }
 
-const addIdea = () => {
-  let idea = {
-    title: Date.now().toString(),
-    description: 'This is a test'
-  }
-  AddIdea(idea)
-}
-
 onMounted(() => {
   getIdeas()
 })
@@ -77,5 +79,11 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-
+.ideas-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 2rem;
+}
 </style>

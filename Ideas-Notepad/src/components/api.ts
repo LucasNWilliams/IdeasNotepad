@@ -3,7 +3,7 @@ import crud from "@/API/crud";
 
 const IdeasListKey = 'Ideas'
 
-const GetIdeas = () => {
+const GetIdeas = (): Promise<IIdeaContent> => {
   const url = IdeasListKey
   return api.GetData(url)
 }

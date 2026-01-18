@@ -1,15 +1,23 @@
 <template>
   <div class="idea-card">
-    <h2>{{ ideaTitle }}</h2>
-    <p class="idea-description">{{ description }}</p>
+    <h2 v-if="title">
+      {{ title }}
+    </h2>
+    <p class="idea-description">
+      {{ description }}
+    </p>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
 
-const ideaTitle = ref('Idea #1');
-const description = ref('This is a description of the idea.');
+interface IIdeaCardProps {
+  id: string
+  title: string,
+  description: string
+}
+
+const props = defineProps<IIdeaCardProps>()
 
 </script>
 
@@ -29,12 +37,16 @@ const description = ref('This is a description of the idea.');
   border-radius: 1rem;
   padding: .5rem 1.5rem;
 
+  display: flex;
+  flex-direction: column;
+
   .idea-description {
     background-color: var(--description-background-color);
     border-radius: .5rem;
-    padding: .5rem .75rem;
+    padding: 1rem 1rem;
     max-height: calc(var(--idea-card-max-height) - 6.25rem);
     height: calc(var(--idea-card-height) - 6.25rem);
+    flex-grow: 1;
   }
 }
 </style>
