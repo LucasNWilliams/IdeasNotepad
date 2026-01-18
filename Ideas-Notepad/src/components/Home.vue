@@ -4,9 +4,10 @@
     <p>Write your ideas here!</p>
 
     <Button :icon="FALibraryIcons.faPlus"
-            @click="toggleNewIdea">Make Idea</Button>
+            label="Make Idea"
+            @click="toggleNewIdea"/>
 
-    <NewIdeaDialog v-model:visible="visible" @save="test"/>
+    <NewIdeaDialog v-model:visible="visible"/>
     <IdeaCard/>
   </div>
 </template>
@@ -23,10 +24,6 @@ let visible = ref(false);
 
 const toggleNewIdea = () => {
   visible.value = !visible.value;
-}
-
-const test = (e) => {
-  console.log(e)
 }
 </script>
 
