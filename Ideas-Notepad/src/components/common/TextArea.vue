@@ -15,11 +15,12 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 
 //TODO have <textarea spellcheck="true"/> be connected to settings
 
 interface ITextInputProps {
+  modelValue?: string
   required?: boolean,
   disabled?: boolean,
   label?: string,
@@ -38,6 +39,9 @@ const autocompleteValue = computed(() => {
 })
 
 const inputValue = ref()
+watch(() => props.modelValue, (modelValue) => {
+  inputValue.value = modelValue
+}, {immediate: true})
 
 const onInput = (e: Event) => {
   const inputValue = (e.target as HTMLInputElement).value

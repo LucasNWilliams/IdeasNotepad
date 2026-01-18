@@ -5,12 +5,12 @@
 
     <Button :icon="FALibraryIcons.faPlus"
             label="Make Idea"
-            @click="toggleNewIdeaDialog"/>
-    <Button @click="addIdea">Add Idea</Button>
+            @click="toggleNewIdeaDialog()"/>
+<!--    <Button @click="addIdea">Add Idea</Button>-->
     <Button @click="ClearIdeas">Clear Ideas</Button>
 
     <NewIdeaDialog v-model:visible="visible"
-                   :new-idea="newIdeaTemplate"
+                   :new-idea="ideaDialogData"
                    @save="saveIdea"/>
     <IdeaCard/>
   </div>
@@ -30,19 +30,19 @@ let newIdeaTemplate: IIdeaContent = {
   description: ''
 }
 
-let ideaDialogData = ref<IIdeaContent>()
+let ideaDialogData = ref<IIdeaContent>({} as IIdeaContent)
 
 let visible = ref(false);
 
 const toggleNewIdeaDialog = (idea: IIdeaContent | null = null) => {
   setIdeaDialogData(idea)
-  visible.value = !visible.value;
+  visible.value = !visible.value
 }
 
 const setIdeaDialogData = (idea: IIdeaContent | null) => {
   ideaDialogData.value = {} as IIdeaContent
 
-  const newIdeaData = (idea == null) ? newIdeaTemplate : idea
+  const newIdeaData = (idea === null) ? newIdeaTemplate : idea
   Object.assign(ideaDialogData.value, newIdeaData)
 }
 

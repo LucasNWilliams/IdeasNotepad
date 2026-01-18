@@ -17,9 +17,10 @@
 
 <script setup lang="ts">
 
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 
 interface ITextInputProps {
+  modelValue?: string,
   required?: boolean,
   inputWidth?: number,
   disabled?: boolean,
@@ -45,6 +46,9 @@ const inputStyles = computed(() => {
 })
 
 const inputValue = ref()
+watch(() => props.modelValue, (modelValue) => {
+  inputValue.value = modelValue
+}, {immediate: true})
 
 const onInput = (e: Event) => {
   const inputValue = (e.target as HTMLInputElement).value
