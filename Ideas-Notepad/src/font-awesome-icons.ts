@@ -7,12 +7,16 @@ import {
 
 import {
   faPlus,
+  faTrashCan,
+  faPen
 } from '@fortawesome/free-solid-svg-icons'
 
 export const FALibraryIcons = {
   faCircleXmark,
+  faPen,
   faPlus,
-  faPlusSquare
+  faPlusSquare,
+  faTrashCan
 }
 
 library.add(...Object.values(FALibraryIcons))
