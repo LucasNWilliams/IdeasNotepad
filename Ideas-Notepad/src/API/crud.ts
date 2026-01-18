@@ -1,9 +1,3 @@
-// TODO
-//   Get
-//   Add
-//   Update
-//   Delete
-
 function GetLocalStorage(key: string): Promise<object[]> {
   return new Promise((resolve, reject) => {
     if (localStorage.getItem(key) == null) {
