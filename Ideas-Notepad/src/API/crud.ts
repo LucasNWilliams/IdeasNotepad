@@ -65,5 +65,6 @@ export default {
   GetLocalStorage,
   SetLocalStorage,
   CreateLocalStorage,
+  UpdateLocalStorage,
   DeleteLocalStorage
 }
