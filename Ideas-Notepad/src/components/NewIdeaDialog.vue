@@ -2,10 +2,10 @@
   <Dialog v-model:visible="visible"
           header="New Idea">
     <div class="new-idea-body">
-      <TextInput v-model="ideaContent.title"
+      <TextInput v-model="newIdea.title"
                  label="Idea Title"
                  full-width/>
-      <TextArea v-model="ideaContent.description"
+      <TextArea v-model="newIdea.description"
                 label="Description"
                 class="idea-description"/>
     </div>
@@ -24,21 +24,21 @@ import TextArea from "@/components/common/TextArea.vue";
 import Button from "@/components/common/Button.vue";
 import {ref} from "vue";
 
+interface INewIdeaDialog {
+  newIdea: IIdeaContent
+}
+
+const props = defineProps<INewIdeaDialog>()
 const emit = defineEmits(['save'])
 
 const visible = defineModel<boolean>('visible', {default: false})
-
-let ideaContent = ref({
-  title: '',
-  description: ''
-})
 
 const closeDialog = () => {
   visible.value = false
 }
 
 const saveDialog = () => {
-  emit('save', ideaContent.value)
+  emit('save', props.newIdea)
   visible.value = false
 }
 

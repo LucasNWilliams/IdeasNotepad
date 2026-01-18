@@ -5,11 +5,13 @@
 
     <Button :icon="FALibraryIcons.faPlus"
             label="Make Idea"
-            @click="toggleNewIdea"/>
+            @click="toggleNewIdeaDialog"/>
     <Button @click="addIdea">Add Idea</Button>
     <Button @click="ClearIdeas">Clear Ideas</Button>
 
-    <NewIdeaDialog v-model:visible="visible"/>
+    <NewIdeaDialog v-model:visible="visible"
+                   :new-idea="newIdeaTemplate"
+                   @save="saveIdea"/>
     <IdeaCard/>
   </div>
 </template>
@@ -23,16 +25,40 @@ import {AddIdea, ClearIdeas, GetIdeas} from "@/components/api";
 
 const NewIdeaDialog = defineAsyncComponent(() => import("@/components/NewIdeaDialog.vue"))
 
+let newIdeaTemplate: IIdeaContent = {
+  title: '',
+  description: ''
+}
+
+let ideaDialogData = ref<IIdeaContent>()
+
 let visible = ref(false);
 
-const toggleNewIdea = () => {
+const toggleNewIdeaDialog = (idea: IIdeaContent | null = null) => {
+  setIdeaDialogData(idea)
   visible.value = !visible.value;
 }
+
+const setIdeaDialogData = (idea: IIdeaContent | null) => {
+  ideaDialogData.value = {} as IIdeaContent
+
+  const newIdeaData = (idea == null) ? newIdeaTemplate : idea
+  Object.assign(ideaDialogData.value, newIdeaData)
+}
+
 
 const getIdeas = () => {
   GetIdeas()
     .then((res) => {
       console.log(res)
+    })
+}
+
+const saveIdea = (ideaData: IIdeaContent) => {
+
+  AddIdea(ideaData)
+    .then(() => {
+      getIdeas()
     })
 }
 
