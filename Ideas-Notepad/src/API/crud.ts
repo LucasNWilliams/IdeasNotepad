@@ -16,28 +16,33 @@ function SetLocalStorage(key: string, value: object[]): Promise<void> {
   })
 }
 
-function generateRandomString(length: number): string {
-  let string = ''
-  const possibleCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'
-
-  for (let i = 0; i < length; i++) {
-    string += possibleCharacters.charAt(Math.floor(Math.random() * possibleCharacters.length))
-  }
-  return string
-}
-
-function CreateLocalStorage(key: string, value: object[]): Promise<void> {
+function CreateLocalStorage(key: string, value: object): Promise<void> {
   return new Promise(async (resolve) => {
     const localStorageArray = await GetLocalStorage(key)
 
-    // Warn Extremely tiny possibility of duplicate ids
     const newIdObject = {
-      id: generateRandomString(16)
+      id: self.crypto.randomUUID()
     }
     Object.assign(value, newIdObject)
 
     localStorageArray.push(value)
-    resolve(SetLocalStorage(key, value))
+    resolve(SetLocalStorage(key, localStorageArray))
+  })
+}
+
+function UpdateLocalStorage(key: string, value: object, id: string) {
+  return new Promise(async (resolve, reject) => {
+    const localStorageArray = await GetLocalStorage(key)
+
+    const updatedItemIndex = localStorageArray.indexOf((item: { id: string }) => item.id === id)
+
+    if (updatedItemIndex != undefined) {
+      Object.assign(localStorageArray[updatedItemIndex], value)
+      resolve(SetLocalStorage(key, localStorageArray))
+    } else {
+      reject('Id does not exist')
+    }
+
   })
 }
 
@@ -51,7 +56,7 @@ function DeleteLocalStorage(key: string, id: string) {
       localStorageArray.splice(deletedItemIndex, 1)
       resolve(SetLocalStorage(key, localStorageArray))
     } else {
-      reject()
+      reject('Id does not exist')
     }
   })
 }
