@@ -1,7 +1,9 @@
 <template>
   <dialog ref="dialog" class="base-dialog">
     <header>
-      <h2>{{ header }}</h2>
+      <slot name="header">
+        <h2>{{ header }}</h2>
+      </slot>
       <div class="dialog-header-left">
         <Button :icon="FALibraryIcons.faCircleXmark"
                 icon-size="2x"

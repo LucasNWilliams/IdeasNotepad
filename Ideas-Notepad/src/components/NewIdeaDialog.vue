@@ -1,8 +1,12 @@
 <template>
-  <Dialog v-model:visible="visible"
-          header="New Idea">
-    <div class="new-idea-body">
+  <Dialog v-model:visible="visible" :header="title">
+    <template v-if="newIdea.title" #header>
       <TextInput v-model="newIdea.title"
+                 full-width/>
+    </template>
+    <div class="new-idea-body">
+      <TextInput v-if="!newIdea.title"
+                 v-model="newIdea.title"
                  label="Idea Title"
                  full-width/>
       <TextArea v-model="newIdea.description"
@@ -22,10 +26,10 @@ import Dialog from "@/components/common/Dialog.vue";
 import TextInput from "@/components/common/TextInput.vue";
 import TextArea from "@/components/common/TextArea.vue";
 import Button from "@/components/common/Button.vue";
-import {ref} from "vue";
 
 interface INewIdeaDialog {
   newIdea: IIdeaContent
+  title?: string
 }
 
 const props = defineProps<INewIdeaDialog>()
@@ -46,8 +50,10 @@ const saveDialog = () => {
 
 <style scoped lang="scss">
 dialog {
+  --dialog-min-height: 30rem;
+
   width: 30rem;
-  min-height: 30rem;
+  min-height: var(--dialog-min-height);
 
   .new-idea-body {
     display: flex;
@@ -57,7 +63,8 @@ dialog {
     padding-bottom: 1rem;
 
     .idea-description {
-      height: 15rem;
+      width: 20rem;
+      height: calc(var(--dialog-min-height) * .75);
     }
   }
 

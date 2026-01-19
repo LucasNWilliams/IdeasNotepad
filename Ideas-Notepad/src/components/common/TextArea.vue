@@ -1,5 +1,5 @@
 <template>
-  <div class="base-text-input">
+  <div class="base-text-area">
     <label>{{ label }}</label>
     <textarea type="text"
               ref="text-input"
@@ -63,8 +63,8 @@ const onEnter = (e: Event) => {
 
 </script>
 
-<style scoped lang="scss">
-.base-text-input {
+<style lang="scss">
+.base-text-area {
   display: flex;
   flex-direction: column;
   gap: .15rem;

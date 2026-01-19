@@ -3,10 +3,9 @@
     <h1>Ideas Notepad</h1>
     <p>Write your ideas here!</p>
 
-    <IdeaDetailsPopup v-model:visible="test"/>
-
     <NewIdeaDialog v-model:visible="visible"
                    :new-idea="ideaDialogData"
+                   :title="ideaDialogHeader"
                    @save="saveIdea"/>
 
     <Button :icon="FALibraryIcons.faPlus"
@@ -16,10 +15,8 @@
 
     <ul class="ideas-list">
       <li v-for="idea in ideas" :key="idea.id">
-        <IdeaCard :id="idea.id"
-                  :title="idea.title"
-                  :description="idea.description"
-                  @edit="editIdeaDialog"
+        <IdeaCard :idea="idea"
+                  @click="editIdeaDialog"
                   @delete="deleteIdea"/>
       </li>
     </ul>
@@ -27,12 +24,11 @@
 </template>
 
 <script setup lang="ts">
-import IdeaCard from "@/components/IdeaCard.vue";
-import {defineAsyncComponent, onMounted, ref} from "vue";
+import {computed, defineAsyncComponent, onMounted, ref} from "vue";
 import Button from "@/components/common/Button.vue";
 import {FALibraryIcons} from "@/font-awesome-icons";
 import {AddIdea, ClearIdeas, DeleteIdea, EditIdea, GetIdea, GetIdeas} from "@/components/api";
-import IdeaDetailsPopup from "@/components/IdeaDetailsPopup.vue";
+import IdeaCard from "@/components/IdeaCard.vue";
 
 const NewIdeaDialog = defineAsyncComponent(() => import("@/components/NewIdeaDialog.vue"))
 
@@ -42,11 +38,13 @@ const newIdeaTemplate: Readonly<IIdeaContent> = {
   description: ''
 }
 
-let test = ref(false)
-
 const ideas = ref<IIdeaContent[]>([])
 let currentIdea = ref<IIdeaContent | null>({} as IIdeaContent)
 let ideaDialogData = ref<IIdeaContent>({} as IIdeaContent)
+
+const ideaDialogHeader = computed(() => {
+  return editing.value ? null : 'New Idea'
+})
 
 let editing = ref(false)
 let visible = ref(false);
@@ -69,10 +67,6 @@ const setIdeaDialogData = (idea: IIdeaContent | null) => {
   Object.assign(ideaDialogData.value, newIdeaData)
 }
 
-const expandIdea = () => {
-
-}
-
 const getIdeas = () => {
   GetIdeas()
     .then((res: IIdeaContent[]) => {
@@ -81,7 +75,7 @@ const getIdeas = () => {
     })
 }
 
-const getIdea = async (id: string): (IIdeaContent | null) => {
+const getIdea = async (id: string) => {
   await GetIdea(id)
     .then((idea: IIdeaContent) => {
       currentIdea.value = idea
@@ -123,7 +117,6 @@ const deleteIdea = (id: string) => {
 
 onMounted(() => {
   getIdeas()
-  test.value = true
 })
 
 </script>

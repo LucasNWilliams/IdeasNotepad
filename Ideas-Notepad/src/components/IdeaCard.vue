@@ -1,96 +1,91 @@
 <template>
-  <div class="idea-card">
-    <div class="idea-card-header">
-      <div class="idea-card-title-container">
-        <h2 v-if="title" class="idea-card-title">
-          {{ title }}
-        </h2>
-      </div>
+  <Card :id="idea.id"
+        :title="idea.title"
+        @click="onClick">
+    <template #header-right>
       <div class="idea-card-buttons">
-        <Button :icon="FALibraryIcons.faPen" @click="onEdit"/>
-        <Button :icon="FALibraryIcons.faTrashCan" @click="onDelete"/>
+<!--        <Button :icon="FALibraryIcons.faPen" @click.stop="onEdit"/>-->
+        <Button :icon="FALibraryIcons.faTrashCan" @click.stop="onDelete"/>
       </div>
-    </div>
-    <p class="idea-description">
-      {{ description }}
-    </p>
-  </div>
+    </template>
+    <template #default>
+      <TextArea v-model="idea.description"
+                class="idea-description"
+                readonly/>
+    </template>
+  </Card>
 </template>
 
 <script setup lang="ts">
-import Button from "@/components/common/Button.vue";
+import Card from "@/components/common/Card.vue";
 import {FALibraryIcons} from "@/font-awesome-icons";
-import {GetIdea} from "@/components/api";
+import Button from "@/components/common/Button.vue";
+import TextArea from "@/components/common/TextArea.vue";
 
 interface IIdeaCardProps {
-  id: string
-  title: string,
-  description: string
+  idea: IIdeaContent
 }
 
 const props = defineProps<IIdeaCardProps>()
-const emit = defineEmits(['edit', 'delete'])
+const emit = defineEmits(['edit', 'delete', 'click'])
 
 const onEdit = () => {
-  emit('edit', props.id)
+  emit('edit', props.idea.id)
 }
 
 const onDelete = () => {
-  emit('delete', props.id)
+  emit('delete', props.idea.id)
 }
 
-// CSS Visibility: hidden / visible
-
+const onClick = () => {
+  emit('click', props.idea.id)
+}
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .idea-card {
-  --card-background-color: color-mix(in oklab, var(--main-background-color) 88%, white);
-  --description-background-color: color-mix(in oklab, var(--main-background-color) 75%, white);
+  cursor: pointer;
+  transition: .2s;
 
-  --idea-card-height: 20rem;
-  --idea-card-max-height: 30rem;
-
-  width: 20rem;
-  max-width: 30rem;
-  height: var(--idea-card-height);
-  max-height: var(--idea-card-max-height);
-  background-color: var(--card-background-color);
-  border-radius: 1rem;
-  padding: .5rem 1.5rem;
-
-  display: flex;
-  flex-direction: column;
-
-  .idea-card-header {
+  .idea-card-buttons {
+    /* TODO decide if I actually want to have the buttons hidden */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .idea-card-title-container {
-      overflow: hidden;
-      min-height: 4.25rem;
-
-      .idea-card-title {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-    }
-
-    .idea-card-buttons {
-      display: flex;
-      height: 100%;
-    }
+    height: 100%;
+    opacity: 0;
+    transition: .3s;
   }
 
   .idea-description {
-    background-color: var(--description-background-color);
-    border-radius: .5rem;
-    padding: 1rem 1rem;
-    max-height: calc(var(--idea-card-max-height) - 6.25rem);
-    height: calc(var(--idea-card-height) - 6.25rem);
-    flex-grow: 1;
+    textarea {
+      background-color: var(--description-background-color);
+      border-radius: .5rem;
+      padding: 1rem 1rem;
+      max-height: calc(var(--idea-card-max-height) - 8.25rem);
+      height: calc(var(--idea-card-height) - 7.5rem);
+      flex-grow: 1;
+      transition: .2s;
+      color: var(--main-text-color)
+    }
   }
+
+  /* TODO decide if I actually want to have the buttons hidden */
+  --card-background-color-hover: color-mix(in oklab, var(--card-background-color) 80%, var(--main-background-color));
+  --card-description-background-color-hover: color-mix(in oklab, var(--description-background-color) 80%, var(--card-background-color-hover));
+
+  &:hover {
+    background-color: var(--card-background-color-hover);
+
+    .idea-card-buttons {
+      opacity: 1;
+    }
+
+    .idea-description {
+      textarea {
+        background-color: var(--card-description-background-color-hover)
+      }
+      }
+  }
+
 }
+
 </style>
