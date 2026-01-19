@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import Button from "@/components/common/Button.vue";
 import {FALibraryIcons} from "@/font-awesome-icons";
+import {GetIdea} from "@/components/api";
 
 interface IIdeaCardProps {
   id: string
@@ -31,7 +32,13 @@ const props = defineProps<IIdeaCardProps>()
 const emit = defineEmits(['edit', 'delete'])
 
 const onEdit = () => {
-  emit('edit', props.id)
+  GetIdea(props.id)
+    .then((idea: IIdeaContent) => {
+      emit('edit', idea)
+    })
+    .catch((error) => {
+      console.log('Could not edit idea: ', error)
+    })
 }
 
 const onDelete = () => {
