@@ -32,13 +32,7 @@ const props = defineProps<IIdeaCardProps>()
 const emit = defineEmits(['edit', 'delete'])
 
 const onEdit = () => {
-  GetIdea(props.id)
-    .then((idea: IIdeaContent) => {
-      emit('edit', idea)
-    })
-    .catch((error) => {
-      console.log('Could not edit idea: ', error)
-    })
+  emit('edit', props.id)
 }
 
 const onDelete = () => {

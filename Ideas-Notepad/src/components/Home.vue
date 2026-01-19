@@ -17,7 +17,7 @@
         <IdeaCard :id="idea.id"
                   :title="idea.title"
                   :description="idea.description"
-                  @edit="toggleNewIdeaDialog"
+                  @edit="editIdeaDialog"
                   @delete="deleteIdea"/>
       </li>
     </ul>
@@ -29,7 +29,7 @@ import IdeaCard from "@/components/IdeaCard.vue";
 import {defineAsyncComponent, onMounted, reactive, ref} from "vue";
 import Button from "@/components/common/Button.vue";
 import {FALibraryIcons} from "@/font-awesome-icons";
-import {AddIdea, ClearIdeas, DeleteIdea, EditIdea, GetIdeas} from "@/components/api";
+import {AddIdea, ClearIdeas, DeleteIdea, EditIdea, GetIdea, GetIdeas} from "@/components/api";
 
 const NewIdeaDialog = defineAsyncComponent(() => import("@/components/NewIdeaDialog.vue"))
 
@@ -39,11 +39,17 @@ const newIdeaTemplate: Readonly<IIdeaContent> = {
   description: ''
 }
 
-const ideas = reactive<IIdeaContent[]>([])
+const ideas = ref<IIdeaContent[]>([])
+let currentIdea = ref<IIdeaContent | null>({} as IIdeaContent)
 let ideaDialogData = ref<IIdeaContent>({} as IIdeaContent)
 
 let editing = ref(false)
 let visible = ref(false);
+
+const editIdeaDialog = async (id: string) => {
+  await getIdea(id)
+  toggleNewIdeaDialog(currentIdea.value)
+}
 
 const toggleNewIdeaDialog = (idea: IIdeaContent | null = null) => {
   setIdeaDialogData(idea)
@@ -62,8 +68,19 @@ const setIdeaDialogData = (idea: IIdeaContent | null) => {
 const getIdeas = () => {
   GetIdeas()
     .then((res: IIdeaContent[]) => {
-      ideas.length = 0;
-      ideas.push(...res)
+      ideas.value.length = 0;
+      ideas.value.push(...res)
+    })
+}
+
+const getIdea = async (id: string): (IIdeaContent | null) => {
+  await GetIdea(id)
+    .then((idea: IIdeaContent) => {
+      currentIdea.value = idea
+    })
+    .catch((error) => {
+      console.error('Could not get idea: ', error)
+      currentIdea.value = null
     })
 }
 

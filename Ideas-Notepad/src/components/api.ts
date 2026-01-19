@@ -8,9 +8,9 @@ const GetIdeas = () => {
   return api.GetData<IIdeaContent[]>(url)
 }
 
-const GetIdea = (id: string) => {
+const GetIdea = async (id: string) => {
   const url = IdeasListKey
-  return crud.GetSingleLocalStorage<IIdeaContent>(url, id)
+  return await crud.GetSingleLocalStorage<IIdeaContent>(url, id)
 }
 
 const AddIdea = (idea: IIdeaContent) => {
