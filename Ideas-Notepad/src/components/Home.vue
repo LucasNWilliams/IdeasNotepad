@@ -3,6 +3,8 @@
     <h1>Ideas Notepad</h1>
     <p>Write your ideas here!</p>
 
+    <IdeaDetailsPopup v-model:visible="test"/>
+
     <NewIdeaDialog v-model:visible="visible"
                    :new-idea="ideaDialogData"
                    @save="saveIdea"/>
@@ -26,10 +28,11 @@
 
 <script setup lang="ts">
 import IdeaCard from "@/components/IdeaCard.vue";
-import {defineAsyncComponent, onMounted, reactive, ref} from "vue";
+import {defineAsyncComponent, onMounted, ref} from "vue";
 import Button from "@/components/common/Button.vue";
 import {FALibraryIcons} from "@/font-awesome-icons";
 import {AddIdea, ClearIdeas, DeleteIdea, EditIdea, GetIdea, GetIdeas} from "@/components/api";
+import IdeaDetailsPopup from "@/components/IdeaDetailsPopup.vue";
 
 const NewIdeaDialog = defineAsyncComponent(() => import("@/components/NewIdeaDialog.vue"))
 
@@ -38,6 +41,8 @@ const newIdeaTemplate: Readonly<IIdeaContent> = {
   title: '',
   description: ''
 }
+
+let test = ref(false)
 
 const ideas = ref<IIdeaContent[]>([])
 let currentIdea = ref<IIdeaContent | null>({} as IIdeaContent)
@@ -64,6 +69,9 @@ const setIdeaDialogData = (idea: IIdeaContent | null) => {
   Object.assign(ideaDialogData.value, newIdeaData)
 }
 
+const expandIdea = () => {
+
+}
 
 const getIdeas = () => {
   GetIdeas()
@@ -115,6 +123,7 @@ const deleteIdea = (id: string) => {
 
 onMounted(() => {
   getIdeas()
+  test.value = true
 })
 
 </script>

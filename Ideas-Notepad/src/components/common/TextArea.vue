@@ -8,6 +8,7 @@
               :placeholder
               :required
               :disabled
+              :readonly
               @input="onInput"
               @change="onChange"
               @keydown.enter="onEnter"/>
@@ -26,6 +27,7 @@ interface ITextInputProps {
   label?: string,
   autocomplete?: boolean,
   placeholder?: string
+  readonly?: boolean
 }
 
 const props = withDefaults(defineProps<ITextInputProps>(), {

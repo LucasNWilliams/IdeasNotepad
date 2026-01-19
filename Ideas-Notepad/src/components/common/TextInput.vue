@@ -9,6 +9,7 @@
            :placeholder
            :required
            :disabled
+           :readonly
            @input="onInput"
            @change="onChange"
            @keydown.enter="onEnter"/>
@@ -16,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-
 import {computed, ref, watch} from "vue";
 
 interface ITextInputProps {
@@ -28,6 +28,7 @@ interface ITextInputProps {
   autocomplete?: boolean,
   placeholder?: string
   fullWidth?: boolean
+  readonly?: boolean
 }
 
 const props = withDefaults(defineProps<ITextInputProps>(), {
