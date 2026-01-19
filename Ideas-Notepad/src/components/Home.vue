@@ -43,7 +43,7 @@ let currentIdea = ref<IIdeaContent | null>({} as IIdeaContent)
 let ideaDialogData = ref<IIdeaContent>({} as IIdeaContent)
 
 const ideaDialogHeader = computed(() => {
-  return editing.value ? null : 'New Idea'
+  return editing.value ? '' : 'New Idea'
 })
 
 let editing = ref(false)

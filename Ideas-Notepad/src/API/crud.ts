@@ -23,7 +23,17 @@ function GetSingleLocalStorage<T>(storageKey: string, id: string): Promise<T> {
   })
 }
 
-function SetLocalStorage<T>(storageKey: string, value: T[]): Promise<void> {
+function GetLocalStorageObject<T>(storageKey: string) {
+  return new Promise((resolve) => {
+    if (localStorage.getItem(storageKey) == null) {
+      void SetLocalStorage<T>(storageKey, {} as T)
+    }
+    const retrievedObject = JSON.parse(localStorage.getItem(storageKey) || '{}')
+    resolve(retrievedObject)
+  })
+}
+
+function SetLocalStorage<T>(storageKey: string, value: T): Promise<void> {
   return new Promise((resolve) => {
     localStorage.setItem(storageKey, JSON.stringify(value || '[]'))
     resolve()
@@ -37,7 +47,7 @@ function CreateLocalStorage<T>(storageKey: string, value: T & { id: string }): P
     value.id = self.crypto.randomUUID()
 
     localStorageArray.push(value)
-    resolve(SetLocalStorage<T>(storageKey, localStorageArray))
+    resolve(SetLocalStorage<T[]>(storageKey, localStorageArray))
   })
 }
 
@@ -49,7 +59,7 @@ function UpdateLocalStorage<T>(storageKey: string, id: string, value: T) {
 
     if (updatedItemIndex != undefined) {
       Object.assign(localStorageArray[updatedItemIndex], value)
-      resolve(SetLocalStorage<T>(storageKey, localStorageArray))
+      resolve(SetLocalStorage<T[]>(storageKey, localStorageArray))
     } else {
       reject('Id does not exist')
     }
@@ -65,7 +75,7 @@ function DeleteLocalStorage<T>(storageKey: string, id: string) {
 
     if (deletedItemIndex >= 0) {
       localStorageArray.splice(deletedItemIndex, 1)
-      resolve(SetLocalStorage<T>(storageKey, localStorageArray))
+      resolve(SetLocalStorage<T[]>(storageKey, localStorageArray))
     } else {
       reject('Id does not exist')
     }
@@ -89,6 +99,7 @@ function ClearLocalStorageKey(storageKey: string) {
 export default {
   GetAllLocalStorage,
   GetSingleLocalStorage,
+  GetLocalStorageObject,
   SetLocalStorage,
   CreateLocalStorage,
   UpdateLocalStorage,

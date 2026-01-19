@@ -2,7 +2,7 @@
   <div class="switch">
     <label>{{ label }}</label>
     <label class="switch-body">
-      <input type="checkbox"/>
+      <input type="checkbox" v-model="inputValue"/>
       <span class="slider"></span>
     </label>
   </div>
@@ -10,11 +10,27 @@
 
 <script setup lang="ts">
 
+import {ref, watch} from "vue";
+
 interface ISwitchProps {
+  modelValue: boolean
   label?: string
 }
 
 const props = defineProps<ISwitchProps>()
+const emit = defineEmits(['update:model-value', 'change'])
+
+const inputValue = ref()
+watch(() => props.modelValue, (newModelValue) => {
+  inputValue.value = newModelValue
+}, {immediate: true})
+
+watch(inputValue, (newValue) => {
+  emit('update:model-value', newValue)
+  emit('change', newValue)
+}, {immediate: true})
+
+// TODO Add catch for if input value is boolean or string
 </script>
 
 <style scoped
@@ -22,9 +38,10 @@ const props = defineProps<ISwitchProps>()
 .switch {
   display: flex;
   flex-direction: column;
-  min-width: 10rem;
-  min-height: 10rem;
+  min-width: var(--width-of-switch);
+  min-height: var(--height-of-switch);
   gap: .5rem;
+  margin: .5rem;
 
   .switch-body {
     --width-of-switch: 3.5rem;
@@ -33,6 +50,7 @@ const props = defineProps<ISwitchProps>()
     --slider-offset: .3rem;
     --slider-background: color-mix(in oklab, var(--main-background-color) 10%, white);
     --checked-slider-background: color-mix(in oklab, var(--slider-background) 20%, #08a508);
+    --transition-time: .25s;
 
     position: relative;
     display: inline-block;
@@ -47,7 +65,7 @@ const props = defineProps<ISwitchProps>()
       right: 0;
       bottom: 0;
       background: var(--slider-background);
-      transition: 0.4s;
+      transition: var(--transition-time);
       border-radius: 2rem;
 
       &:before {
@@ -60,14 +78,16 @@ const props = defineProps<ISwitchProps>()
         left: var(--slider-offset);
         transform: translateY(-50%);
         background: linear-gradient(40deg, #454545, #bdbdbd 70%);
-        transition: 0.4s;
+        transition: var(--transition-time);
       }
     }
 
     input {
       opacity: 0;
-      width: 0;
-      height: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      appearance: none;
 
       &:checked + .slider {
         background-color: var(--checked-slider-background);

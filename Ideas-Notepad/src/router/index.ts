@@ -4,6 +4,10 @@ export enum Home {
   Home = 'Home',
 }
 
+export enum Settings {
+  Settings = 'Settings'
+}
+
 const routes = [
   {
     path: '/appLayout',
@@ -13,6 +17,11 @@ const routes = [
         path: '/',
         name: Home.Home,
         component: () => import('@/components/Home.vue')
+      },
+      {
+        path: '/settings',
+        name: Settings.Settings,
+        component: () => import('@/components/setings/Settings.vue')
       }
     ]
   }
