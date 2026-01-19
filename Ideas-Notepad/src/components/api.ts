@@ -3,22 +3,22 @@ import crud from "@/API/crud";
 
 const IdeasListKey = 'Ideas'
 
-const GetIdeas = (): Promise<IIdeaContent> => {
+const GetIdeas = () => {
   const url = IdeasListKey
-  return api.GetData(url)
+  return api.GetData<IIdeaContent[]>(url)
 }
 
 const GetIdea = (id: string) => {
   const url = IdeasListKey
-  return crud.GetSingleLocalStorage(url, id)
+  return crud.GetSingleLocalStorage<IIdeaContent>(url, id)
 }
 
-const AddIdea = (idea: object) => {
+const AddIdea = (idea: IIdeaContent) => {
   const url = IdeasListKey
   return api.PostData(url, idea)
 }
 
-const EditIdea = (id: string, idea: object) => {
+const EditIdea = (id: string, idea: IIdeaContent) => {
   const url = IdeasListKey
   return api.PutData(url, id, idea)
 }
@@ -35,6 +35,7 @@ const ClearIdeas = () => {
 
 export {
   GetIdeas,
+  GetIdea,
   AddIdea,
   EditIdea,
   DeleteIdea,
