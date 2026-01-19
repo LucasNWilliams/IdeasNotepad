@@ -54,7 +54,7 @@ const setIdeaDialogData = (idea: IIdeaContent | null) => {
   ideaDialogData.value = {} as IIdeaContent
 
   const newIdeaData = (idea === null) ? newIdeaTemplate : idea
-  editing.value = (idea === null)
+  editing.value = (idea !== null)
   Object.assign(ideaDialogData.value, newIdeaData)
 }
 
@@ -69,7 +69,7 @@ const getIdeas = () => {
 
 const saveIdea = (ideaData: IIdeaContent) => {
 
-  if (editing) {
+  if (editing.value) {
     EditIdea(ideaData.id, ideaData)
       .then(() => {
         getIdeas()
