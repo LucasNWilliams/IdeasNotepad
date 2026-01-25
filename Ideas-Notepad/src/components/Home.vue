@@ -1,25 +1,27 @@
 <template>
-  <div>
-    <h1>Ideas Notepad</h1>
-    <p>Write your ideas here!</p>
+  <NewIdeaDialog v-model:visible="visible"
+                 :new-idea="ideaDialogData"
+                 :title="ideaDialogHeader"
+                 @save="saveIdea"/>
 
-    <NewIdeaDialog v-model:visible="visible"
-                   :new-idea="ideaDialogData"
-                   :title="ideaDialogHeader"
-                   @save="saveIdea"/>
+  <div class="home-body">
+    <PageHeader/>
 
-    <Button :icon="FALibraryIcons.faPlus"
-            label="Make Idea"
-            @click="toggleNewIdeaDialog()"/>
-    <Button @click="ClearIdeas">Clear Ideas</Button>
 
-    <ul class="ideas-list">
-      <li v-for="idea in ideas" :key="idea.id">
-        <IdeaCard :idea="idea"
-                  @click="editIdeaDialog"
-                  @delete="deleteIdea"/>
-      </li>
-    </ul>
+    <div class="ideas">
+      <Button :icon="FALibraryIcons.faPlus"
+              label="Make Idea"
+              class="new-idea-button"
+              @click="toggleNewIdeaDialog()"/>
+
+      <ul class="ideas-list">
+        <li v-for="idea in ideas" :key="idea.id">
+          <IdeaCard :idea="idea"
+                    @click="editIdeaDialog"
+                    @delete="deleteIdea"/>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -29,6 +31,7 @@ import Button from "@/components/common/Button.vue";
 import {FALibraryIcons} from "@/font-awesome-icons";
 import {AddIdea, ClearIdeas, DeleteIdea, EditIdea, GetIdea, GetIdeas} from "@/components/api";
 import IdeaCard from "@/components/IdeaCard.vue";
+import PageHeader from "@/components/PageHeader.vue";
 
 const NewIdeaDialog = defineAsyncComponent(() => import("@/components/NewIdeaDialog.vue"))
 
@@ -122,11 +125,32 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.ideas-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  list-style: none;
-  gap: 2rem;
+.home-body {
+  height: 75vh;
+
+  .ideas {
+    --ideas-list-background: color-mix(in oklab, var(--main-background-color) 93%, var(--background-color-mix));
+
+    height: 100%;
+    background: var(--ideas-list-background);
+    border-radius: 2rem;
+    margin: 1.5rem;
+    padding: 1rem;
+
+    .new-idea-button {
+      margin-left: 2.5rem;
+    }
+
+    .ideas-list {
+
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      list-style: none;
+      padding: 1rem;
+      gap: 2rem;
+      min-height: 90%;
+    }
+  }
 }
 </style>

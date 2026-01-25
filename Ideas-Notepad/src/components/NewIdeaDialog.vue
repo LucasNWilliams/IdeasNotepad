@@ -1,11 +1,11 @@
 <template>
   <Dialog v-model:visible="visible" :header="title">
-    <template v-if="newIdea.title" #header>
+    <template v-if="newIdea.id" #header>
       <TextInput v-model="newIdea.title"
                  full-width/>
     </template>
     <div class="new-idea-body">
-      <TextInput v-if="!newIdea.title"
+      <TextInput v-if="!newIdea.id"
                  v-model="newIdea.title"
                  label="Idea Title"
                  full-width/>

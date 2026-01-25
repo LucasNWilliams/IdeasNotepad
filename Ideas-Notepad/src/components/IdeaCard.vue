@@ -4,7 +4,7 @@
         @click="onClick">
     <template #header-right>
       <div class="idea-card-buttons">
-<!--        <Button :icon="FALibraryIcons.faPen" @click.stop="onEdit"/>-->
+        <Button :icon="FALibraryIcons.faPen"/>
         <Button :icon="FALibraryIcons.faTrashCan" @click.stop="onDelete"/>
       </div>
     </template>
