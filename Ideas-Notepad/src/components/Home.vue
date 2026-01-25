@@ -138,7 +138,7 @@ onMounted(() => {
     padding: 1rem;
 
     .new-idea-button {
-      margin-left: 2.5rem;
+      margin-left: 1.75rem;
     }
 
     .ideas-list {
