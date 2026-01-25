@@ -49,12 +49,16 @@ const getSettings = async () => {
     })
 }
 
-const updateSettings = async (settings: ISettings) => {
-  await UpdateSettings(settings)
+const updateSettings = async (newSettings: ISettings) => {
+  await UpdateSettings(newSettings)
     .then(() => {
       getSettings()
     })
 }
+
+// watch(settings.value, () => {
+//   getSettings(settings.value.darkMode)
+// })
 
 onMounted(() => {
   getSettings()

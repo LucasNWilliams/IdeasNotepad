@@ -1,12 +1,20 @@
-body {
+:root {
   --main-background-color: #282c34;
   --main-text-color: #ffffff;
 
+  --background-color-mix: white;
+
+  //--main-background-color-light: #c2c9da;
+  //--main-text-color-light: #black;
+
   --input-border-width: 1px;
-  --input-border-color: #454750FF;
+  --input-border-color: #bdbfcd;
 
-  background-color: var(--main-background-color);
-  color: var(--main-text-color);
+  body {
 
-  font-family: 'Trebuchet MS', sans-serif;
+    background-color: var(--main-background-color);
+    color: var(--main-text-color);
+
+    font-family: 'Trebuchet MS', sans-serif;
+  }
 }

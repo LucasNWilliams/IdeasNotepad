@@ -25,8 +25,8 @@ const props = defineProps<ICardProps>()
 
 <style lang="scss">
 .idea-card {
-  --card-background-color: color-mix(in oklab, var(--main-background-color) 88%, white);
-  --description-background-color: color-mix(in oklab, var(--main-background-color) 75%, white);
+  --card-background-color: color-mix(in oklab, var(--main-background-color) 85%, var(--background-color-mix));
+  --description-background-color: color-mix(in oklab, var(--main-background-color) 75%, var(--background-color-mix));
 
   --idea-card-height: 20rem;
   --idea-card-max-height: 30rem;

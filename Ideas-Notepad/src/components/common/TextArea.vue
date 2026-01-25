@@ -5,6 +5,7 @@
               ref="text-input"
               v-model="inputValue"
               :autocomplete="autocompleteValue"
+              :spellcheck="settings.spellcheckTextArea"
               :placeholder
               :required
               :disabled
@@ -16,7 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref, watch} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
+import {ISettings} from "@/components/setings/Settings.vue";
+import {GetSettings} from "@/components/setings/settingsApi";
 
 //TODO have <textarea spellcheck="true"/> be connected to settings
 
@@ -61,6 +64,18 @@ const onEnter = (e: Event) => {
   emit('enter', inputValue, e)
 }
 
+let settings = ref<ISettings>({} as ISettings)
+
+const getSettings = async () => {
+  await GetSettings()
+    .then((res) => {
+      Object.assign(settings.value, res)
+    })
+}
+
+onMounted(() => {
+  getSettings()
+})
 </script>
 
 <style lang="scss">
