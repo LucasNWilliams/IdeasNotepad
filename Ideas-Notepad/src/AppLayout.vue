@@ -11,7 +11,9 @@ import {ISettings} from "@/components/setings/Settings.vue";
 
 let root = ref<HTMLElement>({} as HTMLElement);
 
-const settings = ref<ISettings>({} as ISettings)
+const settings = ref<ISettings>({
+  darkMode: true
+} as ISettings)
 
 const darkMode = {
   mainBackground: '#282c34',
@@ -34,7 +36,7 @@ const setColorModeVariables = (darkModeValue: boolean) => {
     root.value.style.setProperty('--main-text-color', darkMode.textColor)
     root.value.style.setProperty('--input-border-color', darkMode.inputBorderColor)
     root.value.style.setProperty('--background-color-mix', darkMode.backgroundColorMix)
-  } else if (!darkModeValue) {
+  } else {
     root.value.style.setProperty('--main-background-color', lightMode.mainBackground)
     root.value.style.setProperty('--main-text-color', lightMode.textColor)
     root.value.style.setProperty('--input-border-color', lightMode.inputBorderColor)
