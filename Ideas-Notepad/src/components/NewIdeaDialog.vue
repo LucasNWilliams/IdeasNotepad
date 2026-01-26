@@ -15,8 +15,12 @@
     </div>
     <hr>
     <div class="control-buttons">
-      <Button label="Close" @click="closeDialog"/>
-      <Button label="Save" @click="saveDialog"/>
+      <Button label="Close"
+              secondary
+              @click="closeDialog"/>
+      <Button label="Save"
+              success
+              @click="saveDialog"/>
     </div>
   </Dialog>
 </template>

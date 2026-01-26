@@ -5,7 +5,9 @@
     <template #header-right>
       <div class="idea-card-buttons">
         <Button :icon="FALibraryIcons.faPen"/>
-        <Button :icon="FALibraryIcons.faTrashCan" @click.stop="onDelete"/>
+        <Button :icon="FALibraryIcons.faTrashCan"
+                danger
+                @click.stop="onDelete"/>
       </div>
     </template>
     <template #default>

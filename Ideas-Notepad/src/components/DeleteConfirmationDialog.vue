@@ -2,6 +2,7 @@
   <ConfirmationDialog v-model:visible="visible"
                       :header
                       :confirmation-message
+                      danger-confirm-severity
                       @confirm="onConfirm"/>
 </template>
 

@@ -17,6 +17,13 @@
               class="new-idea-button"
               @click="toggleNewIdeaDialog()"/>
 
+<!--      <Button label="Primary"/>-->
+<!--      <Button label="Secondary" secondary/>-->
+<!--      <Button label="Warning" warning/>-->
+<!--      <Button label="Danger" danger/>-->
+<!--      <Button label="Success" success/>-->
+<!--      <Button label="Info" info/>-->
+
       <ul class="ideas-list">
         <li v-for="idea in ideas" :key="idea.id">
           <IdeaCard :idea="idea"

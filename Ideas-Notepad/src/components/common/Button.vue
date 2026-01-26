@@ -6,12 +6,13 @@
         <FontAwesomeIcon :icon="icon"
                          :size="iconSize"
                          :inverse
-                         class="font-awesome-icon"/>
+                         class="font-awesome-icon-button"/>
     </slot>
   </button>
 
   <button v-else
           class="button-body"
+          :class="severity"
           @click="onClick">
     <template v-if="icon != null">
       <FontAwesomeIcon :icon="icon"
@@ -31,6 +32,8 @@
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {FALibraryIcons} from "@/font-awesome-icons";
 import {IconDefinition} from "@fortawesome/free-regular-svg-icons";
+import {computed} from "vue";
+import {ButtonSeverity} from "@/components/common/enums";
 
 type iconSizes = "2xs" | "xs" | "sm" | "lg" | "xl" | "2xl" | "1x" | "2x" | "3x" | "4x" | "5x" | "6x" | "7x" | "8x" | "9x" | "10x"
 
@@ -40,14 +43,41 @@ interface IButtonProps {
   iconOnly?: boolean
   iconSize?: iconSizes
   inverse?: boolean
+  secondary?: boolean
+  warning?: boolean
+  danger?: boolean
+  success?: boolean
+  info?: boolean
 }
 
 const props = withDefaults(defineProps<IButtonProps>(), {
   iconOnly: false,
   iconSize: '1x',
-  inverse: false
+  inverse: false,
+  secondary: false,
+  warning: false,
+  danger: false,
+  success: false,
+  info: false
 })
 const emit = defineEmits(['click'])
+
+const severity = computed(() => {
+  let severity = undefined;
+  if (props.secondary) {
+    severity = ButtonSeverity.Secondary
+  } else if (props.warning) {
+    severity = ButtonSeverity.Warning
+  } else if (props.danger) {
+    severity = ButtonSeverity.Danger
+  } else if (props.success) {
+    severity = ButtonSeverity.Success
+  } else if (props.info) {
+    severity = ButtonSeverity.Info
+  }
+
+  return severity
+})
 
 const onClick = (e: Event) => {
   emit('click', e)
@@ -55,8 +85,8 @@ const onClick = (e: Event) => {
 
 </script>
 
-<style scoped lang="scss">
-.font-awesome-icon {
+<style lang="scss">
+.font-awesome-icon-button {
   color: #efefef;
 }
 
@@ -94,4 +124,25 @@ const onClick = (e: Event) => {
   }
 
 }
+
+.secondary {
+  background: #8c8c8c;
+}
+
+.warning {
+  background: #fff220;
+}
+
+.danger {
+  background: #e62520;
+}
+
+.success {
+  background: #3dd830;
+}
+
+.info {
+  background: #068ae8;
+}
+
 </style>

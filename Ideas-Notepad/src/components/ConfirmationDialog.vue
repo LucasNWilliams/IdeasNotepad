@@ -4,8 +4,14 @@
       <p>{{ confirmationMessage }}</p>
     </div>
     <div class="control-buttons">
-      <Button label="Close" @click="closeDialog"/>
-      <Button :label="confirmLabel" @click="saveDialog"/>
+      <Button label="Close"
+              secondary
+              @click="closeDialog"/>
+      <Button :label="confirmLabel"
+              :info="infoConfirmSeverity"
+              :warning="warningConfirmSeverity"
+              :danger="dangerConfirmSeverity"
+              @click="saveDialog"/>
     </div>
   </Dialog>
 </template>
@@ -18,10 +24,16 @@ interface IConfirmationDialogProps {
   header: string,
   confirmationMessage?: string
   confirmLabel?: string
+  infoConfirmSeverity?: boolean
+  warningConfirmSeverity?: boolean
+  dangerConfirmSeverity?: boolean
 }
 
 const props = withDefaults(defineProps<IConfirmationDialogProps>(), {
-  confirmLabel: 'Confirm'
+  confirmLabel: 'Confirm',
+  infoConfirmSeverity: true,
+  warningConfirmSeverity: false,
+  dangerConfirmSeverity: false
 })
 const emit = defineEmits(['confirm'])
 
