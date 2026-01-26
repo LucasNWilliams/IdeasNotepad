@@ -63,7 +63,6 @@ const onClick = () => {
       height: calc(var(--idea-card-height) - 7.5rem);
       flex-grow: 1;
       transition: .2s;
-      color: var(--main-text-color)
     }
   }
 

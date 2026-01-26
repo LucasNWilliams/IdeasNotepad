@@ -1,11 +1,15 @@
 :root {
   --main-background-color: #282c34;
   --main-text-color: #ffffff;
+  --main-font-family: 'Trebuchet MS';
 
   --background-color-mix: white;
   --header-background-color-mix: #14161b;
 
   --dialog-background-color: #000000;
+
+  --card-background-color: color-mix(in oklab, var(--main-background-color) 83%, var(--background-color-mix));
+  --description-background-color: color-mix(in oklab, var(--main-background-color) 74%, var(--background-color-mix));
 
   //--main-background-color-light: #c2c9da;
   //--main-text-color-light: #black;
@@ -20,6 +24,6 @@
     background-color: var(--main-background-color);
     color: var(--main-text-color);
 
-    font-family: 'Trebuchet MS', sans-serif;
+    font-family: var(--main-font-family), sans-serif;
   }
 }

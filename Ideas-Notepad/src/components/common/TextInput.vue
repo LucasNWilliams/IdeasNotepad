@@ -82,6 +82,8 @@ const onEnter = (e: Event) => {
     border-color: var(--input-border-color);
     box-shadow: var(--input-shadow-color) 4px 4px;
     background-color: var(--description-background-color);
+    color: var(--main-text-color);
+    font-family: var(--main-font-family), sans-serif;
   }
 }
 </style>

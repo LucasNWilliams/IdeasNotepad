@@ -85,7 +85,7 @@ onMounted(() => {
   gap: .15rem;
 
   textarea {
-    padding: .5rem;
+    padding: .5rem .75rem;
     resize: none;
     border-width: var(--input-border-width);
     border-radius: .5rem;
@@ -93,6 +93,8 @@ onMounted(() => {
     height: 100%;
     box-shadow: var(--input-shadow-color) 4px 4px;
     background-color: var(--description-background-color);
+    color: var(--main-text-color);
+    font-family: var(--main-font-family), sans-serif;
   }
 }
 </style>
