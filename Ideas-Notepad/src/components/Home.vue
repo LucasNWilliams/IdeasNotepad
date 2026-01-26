@@ -17,13 +17,6 @@
               class="new-idea-button"
               @click="toggleNewIdeaDialog()"/>
 
-<!--      <Button label="Primary"/>-->
-<!--      <Button label="Secondary" secondary/>-->
-<!--      <Button label="Warning" warning/>-->
-<!--      <Button label="Danger" danger/>-->
-<!--      <Button label="Success" success/>-->
-<!--      <Button label="Info" info/>-->
-
       <ul class="ideas-list">
         <li v-for="idea in ideas" :key="idea.id">
           <IdeaCard :idea="idea"
@@ -45,6 +38,7 @@ import IdeaCard from "@/components/IdeaCard.vue";
 import PageHeader from "@/components/PageHeader.vue";
 import ConfirmationDialog from "@/components/ConfirmationDialog.vue";
 import DeleteConfirmationDialog from "@/components/DeleteConfirmationDialog.vue";
+import {sortArrayByProperty} from "@/components/helper";
 
 const NewIdeaDialog = defineAsyncComponent(() => import("@/components/NewIdeaDialog.vue"))
 
@@ -97,6 +91,7 @@ const getIdeas = () => {
     .then((res: IIdeaContent[]) => {
       ideas.value.length = 0;
       ideas.value.push(...res)
+      ideas.value = sortArrayByProperty(ideas.value, 'favorite')
     })
 }
 

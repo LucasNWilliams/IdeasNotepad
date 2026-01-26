@@ -40,7 +40,6 @@ interface IIdeaCardProps {
 const props = defineProps<IIdeaCardProps>()
 const emit = defineEmits(['edit', 'delete', 'click', 'star'])
 
-console.log(props.idea)
 const onEdit = () => {
   emit('edit', props.idea.id)
 }
