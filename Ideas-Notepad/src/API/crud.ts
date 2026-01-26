@@ -6,7 +6,7 @@ function GetAllLocalStorage<T>(storageKey: string): Promise<T> {
     setTimeout(() => {
       const retrievedData = JSON.parse(localStorage.getItem(storageKey) || '[]')
       resolve(retrievedData)
-    }, 100)
+    }, 10)
   })
 }
 
@@ -40,7 +40,7 @@ function SetLocalStorage<T>(storageKey: string, value: T): Promise<void> {
     setTimeout(() => {
       localStorage.setItem(storageKey, JSON.stringify(value || '[]'))
       resolve()
-    }, 100)
+    }, 10)
   })
 }
 

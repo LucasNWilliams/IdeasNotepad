@@ -1,6 +1,8 @@
 <template>
   <label class="checkbox-container">
-    <FontAwesomeIcon :icon="currentIcon" size="lg"/>
+    <FontAwesomeIcon :icon="currentIcon"
+                     :style="{ color: iconColor }"
+                     size="lg"/>
     <input type="checkbox"
            v-model="inputValue"
            class="checkbox"/>
@@ -17,9 +19,10 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 interface ISwitchProps {
   modelValue: boolean
-  label?: string
   icon: typeof FALibraryIcons | IconDefinition
   toggledIcon: typeof FALibraryIcons | IconDefinition
+  label?: string
+  color?: string
 }
 
 const props = defineProps<ISwitchProps>()
@@ -42,6 +45,10 @@ const inputValue = computed({
 
 const currentIcon = computed(() => {
   return inputValue.value ? props.toggledIcon : props.icon
+})
+
+const iconColor = computed(() => {
+  return (inputValue.value) ? props.color : undefined
 })
 
 // TODO Add catch for if input value is boolean or string

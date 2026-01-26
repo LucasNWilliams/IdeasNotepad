@@ -7,6 +7,7 @@
                 :icon="FALibraryIcons.farStar"
                 :toggled-icon="FALibraryIcons.fasStar"
                 class="idea-star"
+                color="#ffe045"
                 @update:model-value="onStar"
                 @click.stop/>
     </template>
