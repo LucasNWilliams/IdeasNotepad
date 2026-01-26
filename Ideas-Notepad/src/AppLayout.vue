@@ -30,7 +30,6 @@ const lightMode = {
 }
 
 const setColorModeVariables = (darkModeValue: boolean) => {
-  console.log(darkModeValue)
   if (darkModeValue) {
     root.value.style.setProperty('--main-background-color', darkMode.mainBackground)
     root.value.style.setProperty('--main-text-color', darkMode.textColor)

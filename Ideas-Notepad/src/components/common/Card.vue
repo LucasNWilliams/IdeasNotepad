@@ -31,7 +31,7 @@ const props = defineProps<ICardProps>()
   --idea-card-height: 20rem;
   --idea-card-max-height: 30rem;
 
-  width: 20rem;
+  min-width: 20rem;
   max-width: 30rem;
   height: var(--idea-card-height);
   max-height: var(--idea-card-max-height);

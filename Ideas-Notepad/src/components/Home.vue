@@ -126,30 +126,27 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .home-body {
-  height: 75vh;
+  min-height: 75vh;
 
   .ideas {
     --ideas-list-background: color-mix(in oklab, var(--main-background-color) 93%, var(--background-color-mix));
 
-    height: 100%;
     background: var(--ideas-list-background);
     border-radius: 2rem;
-    margin: 1.5rem;
     padding: 1rem;
+    margin: 1.5rem 1.5rem 3rem;
 
     .new-idea-button {
-      margin-left: 1.75rem;
+      margin-left: 2.75rem;
     }
 
     .ideas-list {
-
-      display: flex;
-      justify-content: flex-start;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+      grid-column-gap: 3.5rem;
+      grid-row-gap: 2rem;
       list-style: none;
-      padding: 1rem;
-      gap: 2rem;
-      min-height: 90%;
+      padding: 1rem 2rem .5rem;
     }
   }
 }
