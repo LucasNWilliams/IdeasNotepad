@@ -13,7 +13,7 @@
 
   <button v-else
           class="button-body"
-          :class="severity, disabled"
+          :class="styles"
           :disabled
           @click="onClick">
     <template v-if="icon != null">
@@ -82,6 +82,10 @@ const severity = computed(() => {
   return severity
 })
 
+const styles = computed(() => {
+  return `${props.disabled ? 'disabled ' : ''}${severity.value}`
+})
+
 const onClick = (e: Event) => {
   emit('click', e)
 }
@@ -146,6 +150,11 @@ const onClick = (e: Event) => {
 
 .info {
   background: #068ae8;
+}
+
+.disabled {
+  opacity: .6;
+  cursor: not-allowed;
 }
 
 </style>
