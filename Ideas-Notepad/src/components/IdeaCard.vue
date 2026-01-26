@@ -2,6 +2,14 @@
   <Card :id="idea.id"
         :title="idea.title"
         @click="onClick">
+    <template #header-left>
+      <Checkbox v-model="idea.favorite"
+                :icon="FALibraryIcons.farStar"
+                :toggled-icon="FALibraryIcons.fasStar"
+                class="idea-star"
+                @update:model-value="onStar"
+                @click.stop/>
+    </template>
     <template #header-right>
       <div class="idea-card-buttons">
         <Button :icon="FALibraryIcons.faPen"/>
@@ -23,14 +31,16 @@ import Card from "@/components/common/Card.vue";
 import {FALibraryIcons} from "@/font-awesome-icons";
 import Button from "@/components/common/Button.vue";
 import TextArea from "@/components/common/TextArea.vue";
+import Checkbox from "@/components/common/Checkbox.vue";
 
 interface IIdeaCardProps {
   idea: IIdeaContent
 }
 
 const props = defineProps<IIdeaCardProps>()
-const emit = defineEmits(['edit', 'delete', 'click'])
+const emit = defineEmits(['edit', 'delete', 'click', 'star'])
 
+console.log(props.idea)
 const onEdit = () => {
   emit('edit', props.idea.id)
 }
@@ -41,6 +51,10 @@ const onDelete = () => {
 
 const onClick = () => {
   emit('click', props.idea.id)
+}
+
+const onStar = () => {
+    emit('star', props.idea)
 }
 </script>
 
@@ -55,6 +69,7 @@ const onClick = () => {
     height: 100%;
     opacity: 0;
     transition: .3s;
+
   }
 
   .idea-description {

@@ -28,6 +28,7 @@
         <li v-for="idea in ideas" :key="idea.id">
           <IdeaCard :idea="idea"
                     @click="editIdeaDialog"
+                    @star="saveIdea"
                     @delete="toggleDeleteDialog"/>
         </li>
       </ul>
@@ -50,7 +51,8 @@ const NewIdeaDialog = defineAsyncComponent(() => import("@/components/NewIdeaDia
 const newIdeaTemplate: Readonly<IIdeaContent> = {
   id: '',
   title: '',
-  description: ''
+  description: '',
+  favorite: false
 }
 
 const ideas = ref<IIdeaContent[]>([])
@@ -110,8 +112,7 @@ const getIdea = async (id: string) => {
 }
 
 const saveIdea = (ideaData: IIdeaContent) => {
-
-  if (editing.value) {
+  if (ideaData.id != '') {
     EditIdea(ideaData.id, ideaData)
       .then(() => {
         getIdeas()

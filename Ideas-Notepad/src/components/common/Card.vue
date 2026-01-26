@@ -1,12 +1,15 @@
 <template>
   <div class="idea-card">
     <div class="idea-card-header">
-      <div class="idea-card-title-container">
-        <h2 v-if="title" class="idea-card-title">
-          {{ title }}
-        </h2>
+      <slot name="header-left"/>
+      <div class="idea-card-title-right">
+        <div class="idea-card-title-container">
+          <h2 v-if="title" class="idea-card-title">
+            {{ title }}
+          </h2>
+        </div>
+        <slot name="header-right"/>
       </div>
-      <slot name="header-right"/>
     </div>
     <slot name="default"/>
   </div>
@@ -42,17 +45,26 @@ const props = defineProps<ICardProps>()
 
   .idea-card-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
+    gap: 1rem;
 
-    .idea-card-title-container {
-      overflow: hidden;
-      min-height: 4.25rem;
+    .idea-card-title-right {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
 
-      .idea-card-title {
-        text-overflow: ellipsis;
-        white-space: nowrap;
+      .idea-card-title-container {
         overflow: hidden;
+        min-height: 4.25rem;
+
+        .idea-card-title {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
       }
     }
   }
