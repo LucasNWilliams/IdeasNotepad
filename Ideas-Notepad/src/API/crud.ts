@@ -3,8 +3,10 @@ function GetAllLocalStorage<T>(storageKey: string): Promise<T> {
     if (localStorage.getItem(storageKey) == null) {
       void SetLocalStorage(storageKey, [])
     }
-    const retrievedData = JSON.parse(localStorage.getItem(storageKey) || '[]')
-    resolve(retrievedData)
+    setTimeout(() => {
+      const retrievedData = JSON.parse(localStorage.getItem(storageKey) || '[]')
+      resolve(retrievedData)
+    }, 100)
   })
 }
 
@@ -35,8 +37,10 @@ function GetLocalStorageObject<T>(storageKey: string) {
 
 function SetLocalStorage<T>(storageKey: string, value: T): Promise<void> {
   return new Promise((resolve) => {
-    localStorage.setItem(storageKey, JSON.stringify(value || '[]'))
-    resolve()
+    setTimeout(() => {
+      localStorage.setItem(storageKey, JSON.stringify(value || '[]'))
+      resolve()
+    }, 100)
   })
 }
 
