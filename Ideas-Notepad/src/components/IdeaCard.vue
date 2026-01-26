@@ -68,8 +68,11 @@ const onStar = () => {
     /* TODO decide if I actually want to have the buttons hidden */
     display: flex;
     height: 100%;
-    opacity: 0;
-    transition: .3s;
+
+    .button-body {
+      opacity: 0;
+      transition: .3s;
+    }
 
   }
 
@@ -88,11 +91,19 @@ const onStar = () => {
   --card-background-color-hover: color-mix(in oklab, var(--card-background-color) 80%, var(--main-background-color));
   --card-description-background-color-hover: color-mix(in oklab, var(--description-background-color) 61%, var(--card-background-color-hover));
 
+  .idea-card-buttons {
+    .button-body {
+      &:hover, &:active, &:focus {
+        opacity: 1;
+      }
+    }
+  }
+
   &:hover {
     background-color: var(--card-background-color-hover);
 
-    .idea-card-buttons {
-      opacity: 1;
+    .button-body {
+        opacity: 1;
     }
 
     .idea-description {
@@ -101,7 +112,6 @@ const onStar = () => {
       }
     }
   }
-
 }
 
 </style>

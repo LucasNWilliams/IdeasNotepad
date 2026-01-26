@@ -95,6 +95,20 @@ onMounted(() => {
     background-color: var(--description-background-color);
     color: var(--main-text-color);
     font-family: var(--main-font-family), sans-serif;
+
+    &::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(32, 32, 32, 0.35);
+      border-radius: .5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #757575;
+      border-radius: .5rem;
+    }
   }
 }
 </style>

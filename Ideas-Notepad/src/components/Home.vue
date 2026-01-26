@@ -142,8 +142,6 @@ onMounted(() => {
   min-height: 75vh;
 
   .ideas {
-    --ideas-list-background: color-mix(in oklab, var(--main-background-color) 93%, var(--background-color-mix));
-
     min-height: inherit;
     background: var(--ideas-list-background);
     border-radius: 2rem;

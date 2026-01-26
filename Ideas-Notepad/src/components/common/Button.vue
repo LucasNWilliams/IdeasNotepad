@@ -113,6 +113,17 @@ const onClick = (e: Event) => {
     background: #d8d8d8;
     transition: .3s;
   }
+
+  &:active {
+    background: #8c8c8c;
+    transition: .3s;
+  }
+
+  &:focus {
+    background: #d8d8d8;
+    transition: .3s;
+    border-color: #3c3c3c;
+  }
 }
 
 .button-icon-only {
@@ -124,6 +135,7 @@ const onClick = (e: Event) => {
   width: 2.5rem;
   padding-inline-start: 0;
   padding-inline-end: 0;
+  cursor: pointer;
 
   &:hover {
     background: rgba(30, 30, 30, 0.7);

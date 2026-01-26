@@ -8,6 +8,8 @@
 
   --dialog-background-color: #000000;
 
+  --ideas-list-background: color-mix(in oklab, var(--main-background-color) 93%, var(--background-color-mix));
+
   --card-background-color: color-mix(in oklab, var(--main-background-color) 83%, var(--background-color-mix));
   --description-background-color: color-mix(in oklab, var(--main-background-color) 74%, var(--background-color-mix));
 
@@ -25,5 +27,22 @@
     color: var(--main-text-color);
 
     font-family: var(--main-font-family), sans-serif;
+    //cursor: none;
+
+    div, span, h1, h2, h3, h4, h5, h6, p {
+      caret-color: transparent;
+    }
+
+    &::-webkit-scrollbar {
+      width: 15px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--ideas-list-background);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #3c3c3c;
+    }
   }
 }
