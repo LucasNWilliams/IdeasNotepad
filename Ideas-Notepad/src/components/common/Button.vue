@@ -1,6 +1,7 @@
 <template>
   <button v-if="iconOnly && icon != null"
           class="button-icon-only"
+          :disabled
           @click="onClick">
     <slot>
         <FontAwesomeIcon :icon="icon"
@@ -12,7 +13,8 @@
 
   <button v-else
           class="button-body"
-          :class="severity"
+          :class="severity, disabled"
+          :disabled
           @click="onClick">
     <template v-if="icon != null">
       <FontAwesomeIcon :icon="icon"
@@ -42,6 +44,7 @@ interface IButtonProps {
   icon?: typeof FALibraryIcons | IconDefinition
   iconOnly?: boolean
   iconSize?: iconSizes
+  disabled?: boolean
   inverse?: boolean
   secondary?: boolean
   warning?: boolean

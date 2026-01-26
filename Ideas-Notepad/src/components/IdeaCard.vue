@@ -15,6 +15,7 @@
         <Button :icon="FALibraryIcons.faPen"/>
         <Button :icon="FALibraryIcons.faTrashCan"
                 danger
+                :disabled="idea.favorite"
                 @click.stop="onDelete"/>
       </div>
     </template>
