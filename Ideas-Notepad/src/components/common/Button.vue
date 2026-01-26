@@ -3,7 +3,10 @@
           class="button-icon-only"
           @click="onClick">
     <slot>
-        <FontAwesomeIcon :icon="icon" :size="iconSize"/>
+        <FontAwesomeIcon :icon="icon"
+                         :size="iconSize"
+                         :inverse
+                         class="font-awesome-icon"/>
     </slot>
   </button>
 
@@ -11,7 +14,9 @@
           class="button-body"
           @click="onClick">
     <template v-if="icon != null">
-      <FontAwesomeIcon :icon="icon" :size="iconSize"/>
+      <FontAwesomeIcon :icon="icon"
+                       :size="iconSize"
+                       :inverse/>
     </template>
     <slot>
       <template v-if="label != null">
@@ -34,11 +39,13 @@ interface IButtonProps {
   icon?: typeof FALibraryIcons | IconDefinition
   iconOnly?: boolean
   iconSize?: iconSizes
+  inverse?: boolean
 }
 
 const props = withDefaults(defineProps<IButtonProps>(), {
   iconOnly: false,
-  iconSize: '1x',
+  iconSize: 'x',
+  inverse: false
 })
 const emit = defineEmits(['click'])
 
@@ -49,6 +56,10 @@ const onClick = (e: Event) => {
 </script>
 
 <style scoped lang="scss">
+.font-awesome-icon {
+  color: #efefef;
+}
+
 .button-body {
   display: flex;
   flex-direction: row;
@@ -59,7 +70,7 @@ const onClick = (e: Event) => {
   cursor: pointer;
   background: #ffffff;
   border-radius: .5rem;
-  box-shadow: grey 4px 4px;
+  box-shadow: var(--default-shadow-color) 4px 4px;
 
   &:hover {
     background: #d8d8d8;
@@ -68,6 +79,7 @@ const onClick = (e: Event) => {
 }
 
 .button-icon-only {
+
   background-color: transparent;
   border-color:transparent;
   border-radius: 50%;
@@ -77,7 +89,7 @@ const onClick = (e: Event) => {
   padding-inline-end: 0;
 
   &:hover {
-    background: #dfdfdf;
+    background: rgba(30, 30, 30, 0.7);
     transition: .4s;
   }
 

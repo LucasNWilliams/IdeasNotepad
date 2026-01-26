@@ -8,6 +8,7 @@
         <Button :icon="FALibraryIcons.faCircleXmark"
                 icon-size="2x"
                 icon-only
+                inverse
                 @click="closeDialog"/>
       </div>
     </header>
@@ -47,7 +48,7 @@ const closeDialog = () => {
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 dialog::backdrop {
   background: black;
   opacity: .5;
@@ -56,7 +57,10 @@ dialog::backdrop {
 .base-dialog {
   padding: 1.5rem;
   border-radius: 1.5rem;
-  border-width: 4px;
+  border-width: 2px;
+  border-color: var(--input-border-color);
+  background: var(--dialog-background-color);
+  color: var(--main-text-color);
 
   header {
     display: flex;

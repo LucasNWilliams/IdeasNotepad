@@ -91,7 +91,8 @@ onMounted(() => {
     border-radius: .5rem;
     border-color: var(--input-border-color);
     height: 100%;
-    box-shadow: grey 4px 4px;
+    box-shadow: var(--input-shadow-color) 4px 4px;
+    background-color: var(--description-background-color);
   }
 }
 </style>

@@ -16,10 +16,14 @@ const settings = ref<ISettings>({
 } as ISettings)
 
 const darkMode = {
-  mainBackground: '#282c34',
+  mainBackground: '#1f2227',
+  dialogBackground: '#2d2e32',
   textColor: '#ffffff',
-  inputBorderColor: '#bdbfcd',
-  backgroundColorMix: '#ffffff'
+  inputBorderColor: '#7d7e8a',
+  inputShadowColor: '#555555',
+  defaultShadowColor: '#454545',
+  backgroundColorMix: '#dfdfdf',
+  headerBackgroundColorMix: '#121317'
 }
 
 const lightMode = {
@@ -32,9 +36,13 @@ const lightMode = {
 const setColorModeVariables = (darkModeValue: boolean) => {
   if (darkModeValue) {
     root.value.style.setProperty('--main-background-color', darkMode.mainBackground)
+    root.value.style.setProperty('--dialog-background-color', darkMode.dialogBackground)
     root.value.style.setProperty('--main-text-color', darkMode.textColor)
     root.value.style.setProperty('--input-border-color', darkMode.inputBorderColor)
+    root.value.style.setProperty('--input-shadow-color', darkMode.inputShadowColor)
+    root.value.style.setProperty('--default-shadow-color', darkMode.defaultShadowColor)
     root.value.style.setProperty('--background-color-mix', darkMode.backgroundColorMix)
+    root.value.style.setProperty('--header-background-color-mix', darkMode.headerBackgroundColorMix)
   } else {
     root.value.style.setProperty('--main-background-color', lightMode.mainBackground)
     root.value.style.setProperty('--main-text-color', lightMode.textColor)

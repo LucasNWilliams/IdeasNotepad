@@ -80,7 +80,8 @@ const onEnter = (e: Event) => {
     border-radius: .25rem;
     border-width: var(--input-border-width);
     border-color: var(--input-border-color);
-    box-shadow: grey 4px 4px
+    box-shadow: var(--input-shadow-color) 4px 4px;
+    background-color: var(--description-background-color);
   }
 }
 </style>

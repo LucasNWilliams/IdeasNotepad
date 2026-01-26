@@ -57,7 +57,6 @@ const onClick = () => {
 
   .idea-description {
     textarea {
-      background-color: var(--description-background-color);
       border-radius: .5rem;
       padding: 1rem 1rem;
       max-height: calc(var(--idea-card-max-height) - 8.25rem);
@@ -70,7 +69,7 @@ const onClick = () => {
 
   /* TODO decide if I actually want to have the buttons hidden */
   --card-background-color-hover: color-mix(in oklab, var(--card-background-color) 80%, var(--main-background-color));
-  --card-description-background-color-hover: color-mix(in oklab, var(--description-background-color) 80%, var(--card-background-color-hover));
+  --card-description-background-color-hover: color-mix(in oklab, var(--description-background-color) 61%, var(--card-background-color-hover));
 
   &:hover {
     background-color: var(--card-background-color-hover);
@@ -83,7 +82,7 @@ const onClick = () => {
       textarea {
         background-color: var(--card-description-background-color-hover)
       }
-      }
+    }
   }
 
 }

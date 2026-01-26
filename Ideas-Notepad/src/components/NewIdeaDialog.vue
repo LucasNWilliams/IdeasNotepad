@@ -48,7 +48,7 @@ const saveDialog = () => {
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 dialog {
   --dialog-min-height: 30rem;
 
