@@ -44,7 +44,7 @@ interface IButtonProps {
 
 const props = withDefaults(defineProps<IButtonProps>(), {
   iconOnly: false,
-  iconSize: 'x',
+  iconSize: '1x',
   inverse: false
 })
 const emit = defineEmits(['click'])

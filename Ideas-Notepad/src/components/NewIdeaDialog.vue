@@ -1,5 +1,5 @@
 <template>
-  <Dialog v-model:visible="visible" :header="title">
+  <Dialog v-model:visible="visible" :header="title" class="new-idea-dialog">
     <template v-if="newIdea.id" #header>
       <TextInput v-model="newIdea.title"
                  full-width/>
@@ -49,7 +49,7 @@ const saveDialog = () => {
 </script>
 
 <style lang="scss">
-dialog {
+.new-idea-dialog {
   --dialog-min-height: 30rem;
 
   width: 30rem;
@@ -67,10 +67,10 @@ dialog {
       height: calc(var(--dialog-min-height) * .75);
     }
   }
+}
 
-  .control-buttons {
-    display: flex;
-    justify-content: flex-end;
-  }
+.control-buttons {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

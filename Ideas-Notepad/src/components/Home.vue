@@ -4,9 +4,12 @@
                  :title="ideaDialogHeader"
                  @save="saveIdea"/>
 
+  <DeleteConfirmationDialog v-model:visible="deleteVisible"
+                            :id="deleteIdeaId"
+                            @confirm="deleteIdea"/>
+
   <div class="home-body">
     <PageHeader/>
-
 
     <div class="ideas">
       <Button :icon="FALibraryIcons.faPlus"
@@ -18,7 +21,7 @@
         <li v-for="idea in ideas" :key="idea.id">
           <IdeaCard :idea="idea"
                     @click="editIdeaDialog"
-                    @delete="deleteIdea"/>
+                    @delete="toggleDeleteDialog"/>
         </li>
       </ul>
     </div>
@@ -32,6 +35,8 @@ import {FALibraryIcons} from "@/font-awesome-icons";
 import {AddIdea, ClearIdeas, DeleteIdea, EditIdea, GetIdea, GetIdeas} from "@/components/api";
 import IdeaCard from "@/components/IdeaCard.vue";
 import PageHeader from "@/components/PageHeader.vue";
+import ConfirmationDialog from "@/components/ConfirmationDialog.vue";
+import DeleteConfirmationDialog from "@/components/DeleteConfirmationDialog.vue";
 
 const NewIdeaDialog = defineAsyncComponent(() => import("@/components/NewIdeaDialog.vue"))
 
@@ -70,6 +75,14 @@ const setIdeaDialogData = (idea: IIdeaContent | null) => {
   Object.assign(ideaDialogData.value, newIdeaData)
 }
 
+let deleteVisible = ref(false)
+let deleteIdeaId = ref<string>('')
+
+const toggleDeleteDialog = (id: string) => {
+  deleteVisible.value = !deleteVisible.value
+  deleteIdeaId.value = id
+}
+
 const getIdeas = () => {
   GetIdeas()
     .then((res: IIdeaContent[]) => {
@@ -104,11 +117,8 @@ const saveIdea = (ideaData: IIdeaContent) => {
   }
 }
 
-const deleteIdea = (id: string) => {
-  // TODO Make this something better (ex. custom component)
-  const confirmDelete = confirm('Are you sure you want to delete this idea? It will be deleted forever.')
-
-  if (confirmDelete) {
+const deleteIdea = (confirmation: boolean, id: string) => {
+  if (confirmation) {
     DeleteIdea(id)
       .then(() => {
         // TODO switch to some type of alert
@@ -131,6 +141,7 @@ onMounted(() => {
   .ideas {
     --ideas-list-background: color-mix(in oklab, var(--main-background-color) 93%, var(--background-color-mix));
 
+    min-height: inherit;
     background: var(--ideas-list-background);
     border-radius: 2rem;
     padding: 1rem;
