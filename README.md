@@ -1,12 +1,8 @@
 # Idea Notepad
 
----
-
 Idea Notepad is a website that lets you create and edit Ideas quickly and easily. The project implements Vue to for its framework, but I created everything else, including the form inputs and page components. 
 
 It was created for the Flavortown hackathon by Hack Club, and version 1.0.0 was created in approximately two weeks.
-
----
 
 ## Features
 
@@ -33,8 +29,6 @@ You can favorite Ideas, this prevents them from being deleted and moves groups t
 
 *The Edit and Delete buttons are hidden on each card until you hover the cursor over the card.
 
----
-
 ## Upcoming Features
 
 ### — Settings
@@ -46,8 +40,6 @@ There are settings being worked on that will allow for more customization than w
 A light mode is in the works that for, well, a light mode version of the website.
 
 It will be accessible through the upcoming settings page
-
----
 
 ## Potential Features
 
@@ -65,6 +57,6 @@ You would be able to move an Idea to another location in the list. Its new locat
 
 Currently, the page relies on local storage to save Ideas. This is extremely limiting as it means that you can only access your Ideas with the browser you made it on. If I can, I plan to let you save Ideas to an account, which would then allow you to access them wherever you are signed in to the Idea Notepad account.
 
-#### — Sharing
+### — Sharing
 
 Once server support is added, I would be able to implement sharing Ideas, which would allow you to share Ideas with a link or similar concept.
