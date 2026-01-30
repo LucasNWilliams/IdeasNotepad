@@ -60,3 +60,5 @@ Currently, the page relies on local storage to save Ideas. This is extremely lim
 ### — Sharing
 
 Once server support is added, I would be able to implement sharing Ideas, which would allow you to share Ideas with a link or similar concept.
+
+## If you have any suggestions or requests, please contact [TuneOfTheWind@gmail.com](mailto:tuneofthewind@gmail.com)
