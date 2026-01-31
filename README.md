@@ -29,23 +29,23 @@ You can favorite Ideas, this prevents them from being deleted and moves groups t
 
 *The Edit and Delete buttons are hidden on each card until you hover the cursor over the card.
 
-## Upcoming Features
+## Partially Implemented Features
 
 ### — Settings
 
-There are settings being worked on that will allow for more customization than what currently exists and potentially more features.
+There are settings being worked on that will allow for more customization than what currently exists and potentially more features. Can be accesses by adding '/settings' to the end of the url
 
 ### — Dark Mode/Light Mode Toggle
 
 A light mode is in the works that for, well, a light mode version of the website.
 
-It will be accessible through the upcoming settings page
+It will be accessible through the settings page
 
 ## Potential Features
 
 These are features that are being considered, but no work has been started on them yet.
 
-### — Multi-level Favorites
+### — Multi-level Favoriting
 
 The concept is that you can favorite an Idea multiple times, placing it higher up in the list of Ideas. The issue is the implementation and how to keep the UI unobtrusive, which may be challenging in a small space.
 
